@@ -2835,7 +2835,8 @@ details[open] > .header__submenu {
 }
 
 .header__menu-item {
-  padding: 1.2rem;
+  padding: 1.2rem 0.4rem 0.4rem 0.4rem;
+  margin: 0 0.8rem 0.8rem 0.8rem;
   text-decoration: none;
   color: rgba(var(--color-foreground), 0.75);
 }
@@ -2848,8 +2849,10 @@ details[open] > .header__submenu {
   transition: text-decoration var(--duration-short) ease;
 }
 
-.header__menu-item:hover span {
-}
+/* .header__menu-item:hover span {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+} */
 
 details[open] > .header__menu-item {
   text-decoration: underline;
@@ -2863,11 +2866,14 @@ details[open] > .header__menu-item .icon-caret {
   transform: rotate(180deg);
 }
 
+/* CUSTOMCODE */
 .header__active-menu-item {
-  transition: text-decoration-thickness var(--duration-short) ease;
+  /* transition: text-decoration-thickness var(--duration-short) ease; */
   color: rgb(var(--color-foreground));
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
+  /* text-decoration: underline;
+  text-underline-offset: 0.3rem; */
+  transform: scaleX(1);
+  color: #000;
 }
 
 .header__menu-item:hover .header__active-menu-item {
@@ -3582,4 +3588,55 @@ details-disclosure > details {
     .button:not([disabled]).button--secondary:hover:after {
     --border-offset: 0px; /* Prevent the border from growing on buttons when this effect is on. */
   }
+}
+
+/* CUSTOMCODE */
+
+.hover-underline-animation {
+  position: relative;
+  color: #000;
+  text-decoration: none;
+}
+
+.hover-underline-animation:hover {
+  color: #000;
+}
+
+.hover-underline-animation::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.hover-underline-animation:hover::before {
+  transform: scaleX(1);
+}
+
+/* New CSS for .header__active-menu-item class */
+.header__active-menu-item {
+  color: #000; /* or any other color you prefer */
+}
+
+.header__active-menu-item::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  transform: scaleX(1); /* This ensures the underline is always shown */
+}
+
+/* Disabling the hover effect for .header__active-menu-item class */
+.header__active-menu-item:hover::before {
+  transform: scaleX(1); /* Keeps the underline as is on hover */
 }
