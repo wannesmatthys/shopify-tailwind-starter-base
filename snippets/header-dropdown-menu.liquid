@@ -40,7 +40,7 @@
                           aria-current="page"
                         {% endif %}
                       >
-                        {{ childlink.title | escape }} CUSTOMCODE1
+                        {{ childlink.title | escape }}
                       </a>
                     {%- else -%}
                       <details id="Details-HeaderSubMenu-{{ link.handle }}-{{ childlink.handle }}">
@@ -65,7 +65,7 @@
                                   aria-current="page"
                                 {% endif %}
                               >
-                                {{ grandchildlink.title | escape }} CUSTOMCODE2
+                                {{ grandchildlink.title | escape }}
                               </a>
                             </li>
                           {%- endfor -%}
@@ -91,7 +91,7 @@
             <span
               
             >
-              {{- link.title | escape -}} CUSTOMCODE3
+              {{- link.title | escape -}}
             </span>
           </a>
         {%- endif -%}
