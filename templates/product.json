@@ -53,7 +53,7 @@
         "collapsible-row-0": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Materials",
+            "heading": "Materialen",
             "icon": "leather",
             "content": "<p>Onze audioinstallaties zijn gemaakt van hoogwaardige materialen die de beste audiokwaliteit produceren!<\/p>",
             "page": ""
@@ -65,6 +65,15 @@
             "heading": "Verzending & Retour",
             "icon": "truck",
             "content": "<p>Alle pakjes worden geleverd binnen gemiddeld 5 werkdagen. <\/p><p>Retouren kan tot 14 dagen na ontvangst van je bestelling.<\/p>",
+            "page": ""
+          }
+        },
+        "61e57daf-de8c-4a82-a668-6bb41de0f560": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "100% Klanttevredenheid",
+            "icon": "silhouette",
+            "content": "<p>Ben je niet tevreden met je bestelling? Neem contact op met onze klantendienst waar we al je vragen beantwoorden.<\/p>",
             "page": ""
           }
         },
@@ -86,6 +95,7 @@
         "description",
         "collapsible-row-0",
         "collapsible-row-1",
+        "61e57daf-de8c-4a82-a668-6bb41de0f560",
         "share"
       ],
       "settings": {
