@@ -8,8 +8,8 @@
         "footer-0": {
           "type": "link_list",
           "settings": {
-            "heading": "Quick links",
-            "menu": "footer"
+            "heading": "Menu",
+            "menu": "main-menu"
           }
         },
         "footer-1": {
@@ -22,8 +22,8 @@
         "footer-2": {
           "type": "text",
           "settings": {
-            "heading": "Our mission",
-            "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+            "heading": "Onze missie",
+            "subtext": "<p>Schrijf hier je missie \/ slogan<\/p>"
           }
         }
       },
