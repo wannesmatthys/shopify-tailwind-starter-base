@@ -126,6 +126,7 @@
         "image-with-text-1"
       ],
       "settings": {
+        "image": "shopify:\/\/shop_images\/dj-spins-and-mixes.jpg",
         "height": "small",
         "desktop_image_width": "medium",
         "layout": "text_first",
