@@ -709,6 +709,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 300px;
 }
 
+.twcss-w-max {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.twcss-w-fit {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .twcss-max-w-sm {
   max-width: 24rem;
 }
@@ -719,6 +731,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .twcss-max-w-md {
   max-width: 28rem;
+}
+
+.twcss-max-w-xl {
+  max-width: 36rem;
 }
 
 .-twcss-translate-x-1\/2 {
@@ -901,6 +917,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .twcss-p-5 {
   padding: 1.25rem;
+}
+
+.twcss-p-24 {
+  padding: 6rem;
 }
 
 .twcss-py-32 {
