@@ -570,14 +570,6 @@ video {
   z-index: 50;
 }
 
-.-twcss-ml-1 {
-  margin-left: -0.25rem;
-}
-
-.-twcss-mt-1 {
-  margin-top: -0.25rem;
-}
-
 .twcss-flex {
   display: flex;
 }
@@ -679,6 +671,11 @@ video {
 .\!twcss-text-white {
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+
+.twcss-text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .twcss-opacity-0 {

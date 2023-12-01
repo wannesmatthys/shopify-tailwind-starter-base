@@ -299,10 +299,12 @@
     transform: scale(1.1);
   }
 
-  .underline-links-hover:hover a {
+  /* CUSTOMCODE */
+  /* .underline-links-hover:hover a {
+    transition: 2s ease;
     text-decoration: underline;
     text-underline-offset: 0.3rem;
-  }
+  } */
 }
 
 .card--standard.card--media .card__inner .card__information,
