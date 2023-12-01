@@ -9,8 +9,9 @@
   }
 {%- endstyle -%}
 
-<div class="twcss-bg-amber-400 twcss-py-32  ">
-  <div class="contact page-width  section-{{ section.id }}-padding twcss-bg-white twcss">
+<div class="twcss-bg-black twcss-py-32  twcss-relative">
+
+  <div class="contact page-width !twcss-py-16 twcss-bg-white twcss">
     {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
       {%- if form.posted_successfully? -%}
         <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
@@ -33,7 +34,7 @@
           </li>
         </ul>
       {%- endif -%}
-      <h2 class="twcss-mb-12 twcss-text-5xl twcss-font-bold">Contactformulier</h2>
+      <h2 class="twcss-mb-12 twcss-text-5xl twcss-uppercase">Contact formulier</h2>
 
       <div class="contact__fields">
         <div class="field">
@@ -109,13 +110,13 @@
           {{- 'templates.contact.form.comment' | t -}}
         </label>
       </div>
-        <button type="submit" class="twcss-py-3  twcss-text-3xl twcss-px-12 twcss-border-0 !twcss-text-black !twcss-bg-amber-400 twcss-flex twcss-gap-3 twcss-items-center">
+        <button type="submit" class="twcss-py-5  twcss-text-3xl twcss-px-12 twcss-border-0 !twcss-text-white !twcss-bg-black twcss-flex twcss-gap-3 twcss-items-center">
           {{ 'templates.contact.form.send' | t }}
           
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clip-path="url(#clip0_585_1452)">
-            <path d="M14.1663 5.83325L5.83301 14.1666" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M6.66699 5.83325H14.167V13.3333" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14.1663 5.83325L5.83301 14.1666" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6.66699 5.83325H14.167V13.3333" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
           </g>
           <defs>
             <clipPath id="clip0_585_1452">

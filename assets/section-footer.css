@@ -347,12 +347,13 @@
   color: rgb(var(--color-foreground));
 }
 
+/* CUSTOMCODE */
 @media screen and (min-width: 750px) {
   .footer-block__details-content .list-menu__item--link:hover,
   .copyright__content a:hover {
     color: rgb(var(--color-foreground));
-    text-decoration: underline;
-    text-underline-offset: 0.3rem;
+    /* text-decoration: underline; */
+    /* text-underline-offset: 0.3rem; */
   }
 
   .footer-block__details-content .list-menu__item--active:hover {
@@ -360,10 +361,13 @@
   }
 }
 
+/* CUSTOMCODE */
 @media screen and (max-width: 989px) {
   .footer-block__details-content .list-menu__item--link {
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    /* padding-bottom: 1rem; */
+    padding-bottom: 0;
+    margin-bottom: 1rem;
   }
 }
 
