@@ -3646,7 +3646,7 @@ details-disclosure > details {
 }
 
 .underline-active-item::before {
-  content: "";
+  content: '';
   position: absolute;
   display: block;
   width: 100%;
