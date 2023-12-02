@@ -6,12 +6,12 @@ linkWebshopElement.addEventListener('touchstart', function(event) {
 });
 
 
-const linkRentalElement = document.querySelector('#webshop'); // Replace with your actual class or ID
+const linkRentalElement = document.querySelector('#rental'); // Replace with your actual class or ID
 linkRentalElement.addEventListener('touchstart', function(event) {
     window.location.href = '/pages/rental'; // Redirect to the link's href attribute
 });
 
-const linkRealisationsElement = document.querySelector('#webshop'); // Replace with your actual class or ID
+const linkRealisationsElement = document.querySelector('#realisations'); // Replace with your actual class or ID
 linkRealisationsElement.addEventListener('touchstart', function(event) {
     window.location.href = '/pages/contact'; // Redirect to the link's href attribute
 });
@@ -45,7 +45,7 @@ linkRealisationsElement.addEventListener('touchstart', function(event) {
       </figcaption>
   </a>
 
-  <a href="/pages/rental" class="lg:twcss-h-screen twcss-h-1/3 twcss-relative twcss-cursor-pointer lg:twcss-w-1/3 lg:hover:twcss-w-1/2 twcss-group twcss-transition-all twcss-duration-1000">
+  <a href="/pages/rental" id="rental" class="lg:twcss-h-screen twcss-h-1/3 twcss-relative twcss-cursor-pointer lg:twcss-w-1/3 lg:hover:twcss-w-1/2 twcss-group twcss-transition-all twcss-duration-1000">
       <figure class="twcss-relative twcss-w-full twcss-h-full">
           <img src="https://cdn.shopify.com/s/files/1/0792/2381/6524/files/rental.webp" alt="rental" class="twcss-w-full twcss-h-full lg:twcss-h-screen  twcss-object-cover twcss-transition-all twcss-duration-1000" />
           <span class="twcss-w-full twcss-h-full lg:twcss-h-screen twcss-bg-slate-900/30 group-hover:twcss-bg-slate-900/0 twcss-absolute twcss-top-0 twcss-transition twcss-duration-700"></span>
@@ -59,7 +59,7 @@ linkRealisationsElement.addEventListener('touchstart', function(event) {
       </figcaption>
   </a>
 
-  <a href="/pages/contact" class="lg:twcss-h-screen twcss-h-1/3 twcss-relative twcss-cursor-pointer lg:twcss-w-1/3 lg:hover:twcss-w-1/2 twcss-group twcss-transition-all twcss-duration-1000">
+  <a href="/pages/contact" id="realisations" class="lg:twcss-h-screen twcss-h-1/3 twcss-relative twcss-cursor-pointer lg:twcss-w-1/3 lg:hover:twcss-w-1/2 twcss-group twcss-transition-all twcss-duration-1000">
       <figure class="twcss-relative twcss-w-full twcss-h-full">
           <img src="https://cdn.shopify.com/s/files/1/0792/2381/6524/files/realisations.webp" alt="realisations" class="twcss-w-full twcss-h-full lg:twcss-h-screen  twcss-object-cover twcss-transition-all twcss-duration-1000" />
           <span class="twcss-w-full twcss-h-full lg:twcss-h-screen twcss-bg-slate-900/30 group-hover:twcss-bg-slate-900/0 twcss-absolute twcss-top-0 twcss-transition twcss-duration-700"></span>
