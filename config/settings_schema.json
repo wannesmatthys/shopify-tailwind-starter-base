@@ -1444,6 +1444,12 @@
       },
       {
         "type": "checkbox",
+        "id": "show_price",
+        "label": "t:settings_schema.cart.settings.show_price.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
         "id": "show_cart_note",
         "label": "t:settings_schema.cart.settings.show_cart_note.label",
         "default": false

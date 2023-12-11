@@ -15,6 +15,7 @@
   - horizontal_class: {Boolean} Add a card--horizontal class if set to true. Default: false (optional)
   - horizontal_quick_add: {Boolean} Changes the quick add button styles when set to true. Default: false (optional)
   - placeholder_image: {String} The placeholder image to use when no product exists. Default: 'product-apparel-2' (optional)
+  - show_price: {Boolean} Show the product price. Default: true (optional)
 
   Usage:
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
@@ -119,7 +120,7 @@
               </a>
             </h3>
           </div>
-          <div class="card__badge {{ settings.badge_position }}">
+          {% comment %} <div class="card__badge {{ settings.badge_position }}">
             {%- if card_product.available == false -%}
               <span
                 id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
@@ -135,7 +136,7 @@
                 {{- 'products.product.on_sale' | t -}}
               </span>
             {%- endif -%}
-          </div>
+          </div> {% endcomment %}
         </div>
       </div>
       <div class="card__content">
@@ -199,11 +200,13 @@
               </p>
             {%- endif -%}
 
-            {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
-            {%- if card_product.quantity_price_breaks_configured? -%}
-              <div class="card__information-volume-pricing-note">
-                <span class="caption">{{ 'products.product.volume_pricing.note' | t }}</span>
-              </div>
+            {%- if show_price -%}
+              {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+              {%- if card_product.quantity_price_breaks_configured? -%}
+                <div class="card__information-volume-pricing-note">
+                  <span class="caption">{{ 'products.product.volume_pricing.note' | t }}</span>
+                </div>
+              {%- endif -%}
             {%- endif -%}
           </div>
         </div>
@@ -378,7 +381,7 @@
               <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
               <div class="caption-with-letter-spacing light">{{ 'products.product.vendor' | t }}</div>
             {%- endif -%}
-            {% render 'price', show_compare_at_price: true %}
+            {% comment %} {% render 'price', show_compare_at_price: true %} {% endcomment %}
           </div>
         </div>
       </div>
