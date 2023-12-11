@@ -120,8 +120,8 @@
               </a>
             </h3>
           </div>
-          {% comment %} <div class="card__badge {{ settings.badge_position }}">
-            {%- if card_product.available == false -%}
+          <div class="card__badge {{ settings.badge_position }}">
+            {%- if card_product.available == false  -%}
               <span
                 id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
                 class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}"
@@ -136,7 +136,7 @@
                 {{- 'products.product.on_sale' | t -}}
               </span>
             {%- endif -%}
-          </div> {% endcomment %}
+          </div> 
         </div>
       </div>
       <div class="card__content">
@@ -200,7 +200,7 @@
               </p>
             {%- endif -%}
 
-            {%- if show_price -%}
+            {%- if show_price == true -%}
               {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
               {%- if card_product.quantity_price_breaks_configured? -%}
                 <div class="card__information-volume-pricing-note">
