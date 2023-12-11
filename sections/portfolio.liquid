@@ -9,18 +9,49 @@
         return `${day} ${monthNames[monthIndex]} ${year}`;
     }
 
+    function saveToLocalStorage(key, data, ttl) {
+        const now = new Date();
+        const item = {
+            value: data,
+            expiry: now.getTime() + ttl,
+        };
+        localStorage.setItem(key, JSON.stringify(item));
+    }
+
+    function loadFromLocalStorage(key) {
+        const itemStr = localStorage.getItem(key);
+        if (!itemStr) {
+            return null;
+        }
+        const item = JSON.parse(itemStr);
+        const now = new Date();
+        if (now.getTime() > item.expiry) {
+            localStorage.removeItem(key);
+            return null;
+        }
+        
+        return item.value;
+    }
+
+
 
     document.addEventListener('DOMContentLoaded', function () {
 
-    fetch('http://localhost:8000/api/realisations') // Replace with the URL provided by your Shopify app or middleware
-        .then(response => response.json())
-        .then(data => {
-            createSwiperSlides(data);
-        })
-        .catch(error => console.error('Error:', error));
+    const realisations = loadFromLocalStorage('realisations');
 
+    if (realisations) {
+        createSwiperSlides(realisations);
+    } else {
+        fetch('http://localhost:8000/api/realisations') // Replace with the URL provided by your Shopify app or middleware
+            .then(response => response.json())
+            .then(data => {
+                saveToLocalStorage('realisations', data, 1000 * 60 * 60 * 24); 
+                createSwiperSlides(data);
+            })
+            .catch(error => console.error('Error:', error));
+    }
 
-        function createSwiperSlides(data) {
+    function createSwiperSlides(data) {
         const swiperContainer = document.getElementById('swiper-container');
         let swiperWrapper = document.createElement('div');
         swiperWrapper.className = 'swiper-wrapper twcss-gap-4';
@@ -94,6 +125,7 @@
     
 });
 {% endjavascript %}
+
 <div class="twcss-w-full twcss-overflow-hidden">
 <div class="swiper-container twcss-w-full twcss-h-full twcss-p-24" id="swiper-container">
 
