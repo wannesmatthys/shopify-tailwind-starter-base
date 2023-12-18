@@ -20,6 +20,14 @@
           "settings": {
           }
         },
+        "1a51a067-bd9b-4dfb-aed9-4f5c9bd418fb": {
+          "type": "inventory",
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 10,
+            "show_inventory_quantity": true
+          }
+        },
         "caption": {
           "type": "text",
           "settings": {
@@ -48,6 +56,7 @@
         "vendor",
         "title",
         "10999efd-3c62-49e8-bf9b-35491d88f68b",
+        "1a51a067-bd9b-4dfb-aed9-4f5c9bd418fb",
         "caption",
         "variant_picker",
         "contact_buttons",
