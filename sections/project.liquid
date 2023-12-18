@@ -1,7 +1,11 @@
 {% javascript %}
+    let imageGallery;
+
     function init() {
       const urlParams = new URLSearchParams(window.location.search);
       const projectId = urlParams.get('project');
+
+      imageGallery = document.querySelector("#nwn-image-gallery");
 
       fetchProject(projectId);
     }
@@ -17,8 +21,50 @@
 
                 /* saveToLocalStorage('realisations', data, 1000 * 60 * 60 * 24); 
                 createSwiperSlides(data); */
+              let html = "";
+
+              data.images.forEach((image) => {
+                html += getImageHtml(image.url);
+              });
+
+              imageGallery.innerHTML = html;
             })
             .catch(error => console.error('Error:', error));
+    }
+
+    function getImageHtml(imageUrl) {
+      return `
+      <li id="Slide-template--20268139774284__main-45113543688524" class="product__media-item grid__item slider__slide is-active scroll-trigger animate--fade-in" data-media-id="template--20268139774284__main-45113543688524">
+
+<div class="product-media-container media-type-image media-fit-contain global-media-settings gradient constrain-height" style="--ratio: 1.5; --preview-ratio: 1.5;">
+<noscript><div class="product__media media">
+    <img src="${imageUrl}" width="1946" height="1297" sizes="(min-width: 1200px) 715px, (min-width: 990px) calc(65.0vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / 1 - 4rem)">
+  </div></noscript>
+
+<modal-opener class="product__modal-opener product__modal-opener--image no-js-hidden" data-modal="#ProductModal-template--20268139774284__main">
+{% comment %} <span class="product__media-icon motion-reduce quick-add-hidden product__media-icon--lightbox" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="icon icon-plus" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"> {% endcomment %}
+<path fill-rule="evenodd" clip-rule="evenodd" d="M4.66724 7.93978C4.66655 7.66364 4.88984 7.43922 5.16598 7.43853L10.6996 7.42464C10.9758 7.42395 11.2002 7.64724 11.2009 7.92339C11.2016 8.19953 10.9783 8.42395 10.7021 8.42464L5.16849 8.43852C4.89235 8.43922 4.66793 8.21592 4.66724 7.93978Z" fill="currentColor"></path>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M7.92576 4.66463C8.2019 4.66394 8.42632 4.88723 8.42702 5.16337L8.4409 10.697C8.44159 10.9732 8.2183 11.1976 7.94215 11.1983C7.66601 11.199 7.44159 10.9757 7.4409 10.6995L7.42702 5.16588C7.42633 4.88974 7.64962 4.66532 7.92576 4.66463Z" fill="currentColor"></path>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12.8324 3.03011C10.1255 0.323296 5.73693 0.323296 3.03011 3.03011C0.323296 5.73693 0.323296 10.1256 3.03011 12.8324C5.73693 15.5392 10.1255 15.5392 12.8324 12.8324C15.5392 10.1256 15.5392 5.73693 12.8324 3.03011ZM2.32301 2.32301C5.42035 -0.774336 10.4421 -0.774336 13.5395 2.32301C16.6101 5.39361 16.6366 10.3556 13.619 13.4588L18.2473 18.0871C18.4426 18.2824 18.4426 18.599 18.2473 18.7943C18.0521 18.9895 17.7355 18.9895 17.5402 18.7943L12.8778 14.1318C9.76383 16.6223 5.20839 16.4249 2.32301 13.5395C-0.774335 10.4421 -0.774335 5.42035 2.32301 2.32301Z" fill="currentColor"></path>
+</svg>
+</span>
+<div class="loading-overlay__spinner hidden">
+  <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+    <circle class="path" fill="none" stroke-width="4" cx="33" cy="33" r="30"></circle>
+  </svg>
+</div>
+<div class="product__media media media--transparent">
+  <img src="${imageUrl}" width="1946" height="1297" class="image-magnify-lightbox" sizes="(min-width: 1200px) 715px, (min-width: 990px) calc(65.0vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / 1 - 4rem)">
+</div>
+<button class="product__media-toggle quick-add-hidden product__media-zoom-lightbox" type="button" aria-haspopup="dialog" data-media-id="45113543688524">
+  <span class="visually-hidden">
+    Media 1 openen in modaal
+  </span>
+</button>
+</modal-opener></div>
+
+      </li>
+      `;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -57,94 +103,9 @@
 <div id="GalleryStatus-template--20268139774284__main" class="visually-hidden" role="status"></div>
 <slider-component id="GalleryViewer-template--20268139774284__main" class="slider-mobile-gutter"><a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-template--20268139774284__main">
     Ga direct naar productinformatie
-  </a><ul id="Slider-Gallery-template--20268139774284__main" class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile" role="list"><li id="Slide-template--20268139774284__main-45113543688524" class="product__media-item grid__item slider__slide is-active scroll-trigger animate--fade-in" data-media-id="template--20268139774284__main-45113543688524">
-
-<div class="product-media-container media-type-image media-fit-contain global-media-settings gradient constrain-height" style="--ratio: 1.5; --preview-ratio: 1.5;">
-<noscript><div class="product__media media">
-    <img src="//aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=1946" alt="" srcset="//aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=246 246w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=493 493w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=600 600w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=713 713w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=823 823w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=990 990w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=1100 1100w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=1206 1206w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=1346 1346w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=1426 1426w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=1646 1646w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=1946 1946w" width="1946" height="1297" sizes="(min-width: 1200px) 715px, (min-width: 990px) calc(65.0vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / 1 - 4rem)">
-  </div></noscript>
-
-<modal-opener class="product__modal-opener product__modal-opener--image no-js-hidden" data-modal="#ProductModal-template--20268139774284__main">
-<span class="product__media-icon motion-reduce quick-add-hidden product__media-icon--lightbox" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="icon icon-plus" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M4.66724 7.93978C4.66655 7.66364 4.88984 7.43922 5.16598 7.43853L10.6996 7.42464C10.9758 7.42395 11.2002 7.64724 11.2009 7.92339C11.2016 8.19953 10.9783 8.42395 10.7021 8.42464L5.16849 8.43852C4.89235 8.43922 4.66793 8.21592 4.66724 7.93978Z" fill="currentColor"></path>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M7.92576 4.66463C8.2019 4.66394 8.42632 4.88723 8.42702 5.16337L8.4409 10.697C8.44159 10.9732 8.2183 11.1976 7.94215 11.1983C7.66601 11.199 7.44159 10.9757 7.4409 10.6995L7.42702 5.16588C7.42633 4.88974 7.64962 4.66532 7.92576 4.66463Z" fill="currentColor"></path>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M12.8324 3.03011C10.1255 0.323296 5.73693 0.323296 3.03011 3.03011C0.323296 5.73693 0.323296 10.1256 3.03011 12.8324C5.73693 15.5392 10.1255 15.5392 12.8324 12.8324C15.5392 10.1256 15.5392 5.73693 12.8324 3.03011ZM2.32301 2.32301C5.42035 -0.774336 10.4421 -0.774336 13.5395 2.32301C16.6101 5.39361 16.6366 10.3556 13.619 13.4588L18.2473 18.0871C18.4426 18.2824 18.4426 18.599 18.2473 18.7943C18.0521 18.9895 17.7355 18.9895 17.5402 18.7943L12.8778 14.1318C9.76383 16.6223 5.20839 16.4249 2.32301 13.5395C-0.774335 10.4421 -0.774335 5.42035 2.32301 2.32301Z" fill="currentColor"></path>
-</svg>
-</span>
-<div class="loading-overlay__spinner hidden">
-  <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-    <circle class="path" fill="none" stroke-width="4" cx="33" cy="33" r="30"></circle>
-  </svg>
-</div>
-<div class="product__media media media--transparent">
-  <img src="//aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=1946" alt="" srcset="//aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=246 246w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=493 493w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=600 600w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=713 713w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=823 823w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=990 990w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=1100 1100w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=1206 1206w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=1346 1346w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=1426 1426w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=1646 1646w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371&amp;width=1946 1946w" width="1946" height="1297" class="image-magnify-lightbox" sizes="(min-width: 1200px) 715px, (min-width: 990px) calc(65.0vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / 1 - 4rem)">
-</div>
-<button class="product__media-toggle quick-add-hidden product__media-zoom-lightbox" type="button" aria-haspopup="dialog" data-media-id="45113543688524">
-  <span class="visually-hidden">
-    Media 1 openen in modaal
-  </span>
-</button>
-</modal-opener></div>
-
-      </li><li id="Slide-template--20268139774284__main-45114258358604" class="product__media-item grid__item slider__slide scroll-trigger animate--fade-in" data-media-id="template--20268139774284__main-45114258358604">
-
-<div class="product-media-container media-type-image media-fit-contain global-media-settings gradient constrain-height" style="--ratio: 1.650925925925926; --preview-ratio: 1.650925925925926;">
-<noscript><div class="product__media media">
-    <img src="//aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=1946" alt="" srcset="//aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=246 246w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=493 493w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=600 600w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=713 713w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=823 823w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=990 990w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=1100 1100w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=1206 1206w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=1346 1346w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=1426 1426w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=1646 1646w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=1946 1946w" width="1946" height="1179" loading="lazy" sizes="(min-width: 1200px) 715px, (min-width: 990px) calc(65.0vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / 1 - 4rem)">
-  </div></noscript>
-
-<modal-opener class="product__modal-opener product__modal-opener--image no-js-hidden" data-modal="#ProductModal-template--20268139774284__main">
-<span class="product__media-icon motion-reduce quick-add-hidden product__media-icon--lightbox" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="icon icon-plus" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M4.66724 7.93978C4.66655 7.66364 4.88984 7.43922 5.16598 7.43853L10.6996 7.42464C10.9758 7.42395 11.2002 7.64724 11.2009 7.92339C11.2016 8.19953 10.9783 8.42395 10.7021 8.42464L5.16849 8.43852C4.89235 8.43922 4.66793 8.21592 4.66724 7.93978Z" fill="currentColor"></path>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M7.92576 4.66463C8.2019 4.66394 8.42632 4.88723 8.42702 5.16337L8.4409 10.697C8.44159 10.9732 8.2183 11.1976 7.94215 11.1983C7.66601 11.199 7.44159 10.9757 7.4409 10.6995L7.42702 5.16588C7.42633 4.88974 7.64962 4.66532 7.92576 4.66463Z" fill="currentColor"></path>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M12.8324 3.03011C10.1255 0.323296 5.73693 0.323296 3.03011 3.03011C0.323296 5.73693 0.323296 10.1256 3.03011 12.8324C5.73693 15.5392 10.1255 15.5392 12.8324 12.8324C15.5392 10.1256 15.5392 5.73693 12.8324 3.03011ZM2.32301 2.32301C5.42035 -0.774336 10.4421 -0.774336 13.5395 2.32301C16.6101 5.39361 16.6366 10.3556 13.619 13.4588L18.2473 18.0871C18.4426 18.2824 18.4426 18.599 18.2473 18.7943C18.0521 18.9895 17.7355 18.9895 17.5402 18.7943L12.8778 14.1318C9.76383 16.6223 5.20839 16.4249 2.32301 13.5395C-0.774335 10.4421 -0.774335 5.42035 2.32301 2.32301Z" fill="currentColor"></path>
-</svg>
-</span>
-<div class="loading-overlay__spinner hidden">
-  <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-    <circle class="path" fill="none" stroke-width="4" cx="33" cy="33" r="30"></circle>
-  </svg>
-</div>
-<div class="product__media media media--transparent">
-  <img src="//aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=1946" alt="" srcset="//aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=246 246w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=493 493w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=600 600w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=713 713w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=823 823w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=990 990w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=1100 1100w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=1206 1206w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=1346 1346w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=1426 1426w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=1646 1646w, //aebd55-3.myshopify.com/cdn/shop/files/pexels-pixabay-164938_compressed.jpg?v=1702914127&amp;width=1946 1946w" width="1946" height="1179" loading="lazy" class="image-magnify-lightbox" sizes="(min-width: 1200px) 715px, (min-width: 990px) calc(65.0vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / 1 - 4rem)">
-</div>
-<button class="product__media-toggle quick-add-hidden product__media-zoom-lightbox" type="button" aria-haspopup="dialog" data-media-id="45114258358604">
-  <span class="visually-hidden">
-    Media 2 openen in modaal
-  </span>
-</button>
-</modal-opener></div>
-
-      </li><li id="Slide-template--20268139774284__main-45114258391372" class="product__media-item grid__item slider__slide scroll-trigger animate--fade-in" data-media-id="template--20268139774284__main-45114258391372">
-
-<div class="product-media-container media-type-image media-fit-contain global-media-settings gradient constrain-height" style="--ratio: 1.5; --preview-ratio: 1.5;">
-<noscript><div class="product__media media">
-    <img src="//aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=1946" alt="" srcset="//aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=246 246w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=493 493w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=600 600w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=713 713w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=823 823w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=990 990w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=1100 1100w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=1206 1206w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=1346 1346w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=1426 1426w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=1646 1646w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=1946 1946w" width="1946" height="1297" loading="lazy" sizes="(min-width: 1200px) 715px, (min-width: 990px) calc(65.0vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / 1 - 4rem)">
-  </div></noscript>
-
-<modal-opener class="product__modal-opener product__modal-opener--image no-js-hidden" data-modal="#ProductModal-template--20268139774284__main">
-<span class="product__media-icon motion-reduce quick-add-hidden product__media-icon--lightbox" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="icon icon-plus" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M4.66724 7.93978C4.66655 7.66364 4.88984 7.43922 5.16598 7.43853L10.6996 7.42464C10.9758 7.42395 11.2002 7.64724 11.2009 7.92339C11.2016 8.19953 10.9783 8.42395 10.7021 8.42464L5.16849 8.43852C4.89235 8.43922 4.66793 8.21592 4.66724 7.93978Z" fill="currentColor"></path>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M7.92576 4.66463C8.2019 4.66394 8.42632 4.88723 8.42702 5.16337L8.4409 10.697C8.44159 10.9732 8.2183 11.1976 7.94215 11.1983C7.66601 11.199 7.44159 10.9757 7.4409 10.6995L7.42702 5.16588C7.42633 4.88974 7.64962 4.66532 7.92576 4.66463Z" fill="currentColor"></path>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M12.8324 3.03011C10.1255 0.323296 5.73693 0.323296 3.03011 3.03011C0.323296 5.73693 0.323296 10.1256 3.03011 12.8324C5.73693 15.5392 10.1255 15.5392 12.8324 12.8324C15.5392 10.1256 15.5392 5.73693 12.8324 3.03011ZM2.32301 2.32301C5.42035 -0.774336 10.4421 -0.774336 13.5395 2.32301C16.6101 5.39361 16.6366 10.3556 13.619 13.4588L18.2473 18.0871C18.4426 18.2824 18.4426 18.599 18.2473 18.7943C18.0521 18.9895 17.7355 18.9895 17.5402 18.7943L12.8778 14.1318C9.76383 16.6223 5.20839 16.4249 2.32301 13.5395C-0.774335 10.4421 -0.774335 5.42035 2.32301 2.32301Z" fill="currentColor"></path>
-</svg>
-</span>
-<div class="loading-overlay__spinner hidden">
-  <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-    <circle class="path" fill="none" stroke-width="4" cx="33" cy="33" r="30"></circle>
-  </svg>
-</div>
-<div class="product__media media media--transparent">
-  <img src="//aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=1946" alt="" srcset="//aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=246 246w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=493 493w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=600 600w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=713 713w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=823 823w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=990 990w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=1100 1100w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=1206 1206w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=1346 1346w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=1426 1426w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=1646 1646w, //aebd55-3.myshopify.com/cdn/shop/files/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126&amp;width=1946 1946w" width="1946" height="1297" loading="lazy" class="image-magnify-lightbox" sizes="(min-width: 1200px) 715px, (min-width: 990px) calc(65.0vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / 1 - 4rem)">
-</div>
-<button class="product__media-toggle quick-add-hidden product__media-zoom-lightbox" type="button" aria-haspopup="dialog" data-media-id="45114258391372">
-  <span class="visually-hidden">
-    Media 3 openen in modaal
-  </span>
-</button>
-</modal-opener></div>
-
-      </li></ul><div class="slider-buttons no-js-hidden quick-add-hidden">
+  </a><ul id="nwn-image-gallery" class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile" role="list">
+    {% comment %} IMAGES COME HERE {% endcomment %}
+  </ul><div class="slider-buttons no-js-hidden quick-add-hidden">
     <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="Naar links schuiven" disabled="disabled">
       <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
@@ -284,12 +245,6 @@ contactButton.addEventListener('click', function() {
     </a>
   </product-info>
 </div></div>
-
-
-
-
-
-
 
 <script src="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/product-modal.js?v=132575917445348640851701096402" defer="defer"></script>
 <script src="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/media-gallery.js?v=95758955085303843141701096400" defer="defer"></script><script>
