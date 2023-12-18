@@ -589,8 +589,28 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 0px;
 }
 
+.twcss-h-32 {
+  height: 8rem;
+}
+
+.twcss-h-12 {
+  height: 3rem;
+}
+
+.twcss-h-20 {
+  height: 5rem;
+}
+
+.twcss-h-96 {
+  height: 24rem;
+}
+
 .twcss-w-full {
   width: 100%;
+}
+
+.twcss-w-32 {
+  width: 8rem;
 }
 
 .twcss-max-w-xl {
