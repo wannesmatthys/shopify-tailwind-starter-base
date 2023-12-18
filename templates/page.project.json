@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "portfolio": {
+      "type": "portfolio",
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "portfolio",
+    "main"
+  ]
+}
