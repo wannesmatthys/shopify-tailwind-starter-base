@@ -9,7 +9,7 @@
   }
 {%- endstyle -%}
 
-<div class="twcss-bg-black twcss-py-32  twcss-relative">
+<div class="twcss-bg-black twcss-py-32  twcss-relative" id="form">
 
   <div class="contact page-width !twcss-py-16 twcss-bg-white twcss">
     {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
@@ -128,6 +128,23 @@
         </button>
     {%- endform -%}
   </div>
+
+
+  <script>
+    // document onload
+
+    window.addEventListener('load', function() {
+        const productDetails = localStorage.getItem('selectedProductDetails');
+
+        if (productDetails) {
+          const parsed = JSON.parse(productDetails);
+
+          document.getElementById('ContactForm-body').value = `Goeiemiddag, ik heb interesse in het product: ${parsed.title} met ID ${parsed.id}\n\nExtra informatie:\n`;
+        
+          localStorage.removeItem('selectedProductDetails');
+        }
+    });
+  </script>
 </div>
 
 {% schema %}

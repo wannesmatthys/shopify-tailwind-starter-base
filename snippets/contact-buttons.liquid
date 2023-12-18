@@ -1,0 +1,39 @@
+{% comment %}
+  Renders product buy-buttons.
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} product form id.
+  - section_id: {String} id of section to which this snippet belongs.
+
+  Usage:
+  {% render 'contact-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id %}
+{% endcomment %}
+
+<div {{ block.shopify_attributes }}>
+
+    <div class="product-form">
+      <div class="product-form__buttons form">
+        <button
+          type="submit"
+          name="add"
+          class="product-form__submit button button--full-width button--primary"
+        >
+          Contacteer ons
+        </button>
+      </div>
+    </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const contactButton = document.querySelector('.product-form__submit');
+    const productDetails = {{ product | json }};
+    
+    contactButton.addEventListener('click', function() {
+      localStorage.setItem('selectedProductDetails', JSON.stringify(productDetails));
+      window.location.href = "/pages/contact#form";
+    });
+  });
+</script>
