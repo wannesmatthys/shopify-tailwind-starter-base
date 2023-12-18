@@ -1,0 +1,10 @@
+{% javascript %}
+    function init() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const projetcId = urlParams.get('project');
+
+      console.log("projetcId", projetcId);
+    }
+
+    document.addEventListener('DOMContentLoaded', init)
+{% endjavascript %}
