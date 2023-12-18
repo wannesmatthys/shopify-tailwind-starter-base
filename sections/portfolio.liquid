@@ -42,7 +42,7 @@
     if (realisations) {
         createSwiperSlides(realisations);
     } else {
-        fetch('http://localhost:8000/api/realisations') // Replace with the URL provided by your Shopify app or middleware
+        fetch('https://ethernum.nwnsoftware.be/api/realisations') // Replace with the URL provided by your Shopify app or middleware
             .then(response => response.json())
             .then(data => {
                 saveToLocalStorage('realisations', data, 1000 * 60 * 60 * 24); 
