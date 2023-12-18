@@ -29,7 +29,9 @@
           }
         },
         "contact_buttons": {
-          "type": "contact_buttons"
+          "type": "contact_buttons",
+          "settings": {
+          }
         },
         "description": {
           "type": "description",
@@ -41,15 +43,9 @@
         "vendor",
         "title",
         "caption",
-        "price",
         "variant_picker",
-        "quantity_selector",
         "contact_buttons",
-        "description",
-        "collapsible-row-0",
-        "collapsible-row-1",
-        "61e57daf-de8c-4a82-a668-6bb41de0f560",
-        "share"
+        "description"
       ],
       "settings": {
         "enable_sticky_info": true,
