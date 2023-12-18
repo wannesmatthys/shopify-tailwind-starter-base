@@ -60,7 +60,8 @@
             let slide = document.createElement('div');
             slide.className = 'swiper-slide';
             slide.innerHTML = `
-                <div class="twcss-relative twcss-max-w-xl twcss-h-[400px] twcss-rounded twcss-overflow-hidden twcss-shadow-lg twcss-group " >
+                <a href="/pages/project-detail?project=${item.id}">
+                    <div class="twcss-relative twcss-max-w-xl twcss-h-[400px] twcss-rounded twcss-overflow-hidden twcss-shadow-lg twcss-group " >
                     <img class=" twcss-absolute twcss-w-full twcss-object-cover twcss-h-full" src="${item.thumbnail.url}" alt="${item.thumbnail.alt}">
                 
                     <div class=" twcss-absolute twcss-bottom-0 twcss-w-full twcss-px-5 twcss-py-10 twcss-pt-20 " style="background: rgba(0,0,0,0.7);clip-path: polygon(0 0, 100% 4rem, 100% 100%, 0 100%);">
@@ -70,6 +71,7 @@
                         <p class="twcss-text-white twcss-text-2xl twcss-mt-3 twcss-leading-relaxed twcss-text-transparent group-hover:twcss-text-white twcss-h-0 group-hover:twcss-h-[175px] twcss-transition-all twcss-duration-700 twcss-opacity-0 group-hover:twcss-opacity-100">${item.description}</p>
                     </div>
                 </div>
+                </a>
             `;
             swiperWrapper.appendChild(slide);
         });

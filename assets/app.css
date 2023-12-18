@@ -572,6 +572,10 @@ video {
   top: 3rem;
 }
 
+.twcss-top-10 {
+  top: 2.5rem;
+}
+
 .twcss-z-20 {
   z-index: 20;
 }
@@ -618,6 +622,22 @@ video {
 
 .twcss-h-96 {
   height: 24rem;
+}
+
+.twcss-h-80 {
+  height: 20rem;
+}
+
+.twcss-h-64 {
+  height: 16rem;
+}
+
+.twcss-h-72 {
+  height: 18rem;
+}
+
+.twcss-h-48 {
+  height: 12rem;
 }
 
 .twcss-w-full {
@@ -914,6 +934,10 @@ video {
 
   .lg\:twcss-h-screen {
     height: 100vh;
+  }
+
+  .lg\:twcss-h-72 {
+    height: 18rem;
   }
 
   .lg\:twcss-w-1\/3 {
