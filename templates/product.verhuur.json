@@ -15,6 +15,11 @@
           "settings": {
           }
         },
+        "10999efd-3c62-49e8-bf9b-35491d88f68b": {
+          "type": "price",
+          "settings": {
+          }
+        },
         "caption": {
           "type": "text",
           "settings": {
@@ -42,6 +47,7 @@
       "block_order": [
         "vendor",
         "title",
+        "10999efd-3c62-49e8-bf9b-35491d88f68b",
         "caption",
         "variant_picker",
         "contact_buttons",
