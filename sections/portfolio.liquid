@@ -1,134 +1,137 @@
 {% javascript %}
-        document.addEventListener('DOMContentLoaded', function () {
-        const mySwiper = new Swiper('.swiper-container', {
-            // Parameters
-            loop: false,
-            pagination: {
-                el: '.swiper-pagination',
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints: {
-                // when window width is >= 320px
-                320: {
-                    slidesPerView:1,
-                    spaceBetween: 0,
-                },
-                // when window width is >= 640px
-                640: {
-                    slidesPerView: 1.5,
-                    spaceBetween: 0,
-                },
-                // when window width is >= 768px (the 'md' breakpoint in Tailwind)
-                768: {
-                    slidesPerView: 2.5,
-                    spaceBetween: 0,
-                },
-                1048: {
-                    slidesPerView: 3.5, // Keep it at 3 or increase if the slider is meant to be wider than the container
-                    spaceBetween: 0,
-                }, // tailwind xl and 2xl breakpoints!
-                1536: {
-                    slidesPerView: 4.5,
-                    spaceBetween: 0,
-                },
-                2048: {
-                    slidesPerView: 5.5,
-                    spaceBetween: 0,
-                },
+    function formatDate(dateString) {
+        const monthNames = ["jan.", "feb.", "mrt.", "apr.", "mei", "jun.", "jul.", "aug.", "sep.", "okt.", "nov.", "dec."];
+        const date = new Date(dateString);
+        const day = date.getDate();
+        const monthIndex = date.getMonth();
+        const year = date.getFullYear();
 
-            },
+        return `${day} ${monthNames[monthIndex]} ${year}`;
+    }
 
-            // ... more options as needed ...
+    function saveToLocalStorage(key, data, ttl) {
+        const now = new Date();
+        const item = {
+            value: data,
+            expiry: now.getTime() + ttl,
+        };
+        localStorage.setItem(key, JSON.stringify(item));
+    }
+
+    function loadFromLocalStorage(key) {
+        const itemStr = localStorage.getItem(key);
+        if (!itemStr) {
+            return null;
+        }
+        const item = JSON.parse(itemStr);
+        const now = new Date();
+        if (now.getTime() > item.expiry) {
+            localStorage.removeItem(key);
+            return null;
+        }
+        
+        return item.value;
+    }
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+    const realisations = loadFromLocalStorage('realisations');
+
+    if (realisations) {
+        createSwiperSlides(realisations);
+    } else {
+        fetch('https://ethernum.nwnsoftware.be/api/realisations') // Replace with the URL provided by your Shopify app or middleware
+            .then(response => response.json())
+            .then(data => {
+                saveToLocalStorage('realisations', data, 1000 * 60 * 60 * 24); 
+                createSwiperSlides(data);
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function createSwiperSlides(data) {
+        const swiperContainer = document.getElementById('swiper-container');
+        let swiperWrapper = document.createElement('div');
+        swiperWrapper.className = 'swiper-wrapper twcss-gap-4';
+
+        data.forEach(item => {
+            let slide = document.createElement('div');
+            slide.className = 'swiper-slide';
+            slide.innerHTML = `
+                <div class="twcss-relative twcss-max-w-xl twcss-h-[400px] twcss-rounded twcss-overflow-hidden twcss-shadow-lg twcss-group " >
+                    <img class=" twcss-absolute twcss-w-full twcss-object-cover twcss-h-full" src="${item.thumbnail.url}" alt="${item.thumbnail.alt}">
+                
+                    <div class=" twcss-absolute twcss-bottom-0 twcss-w-full twcss-px-5 twcss-py-10 twcss-pt-20 " style="background: rgba(0,0,0,0.7);clip-path: polygon(0 0, 100% 4rem, 100% 100%, 0 100%);">
+                        <h2 class="twcss-text-4xl twcss-font-semibold twcss-text-white twcss-uppercase ">${item.title}</h2>
+                        <p class="twcss-text-gray-300 twcss-text-3xl twcss-mt-1 ">${formatDate(item.date)}</p>
+
+                        <p class="twcss-text-white twcss-text-2xl twcss-mt-3 twcss-leading-relaxed twcss-text-transparent group-hover:twcss-text-white twcss-h-0 group-hover:twcss-h-[175px] twcss-transition-all twcss-duration-700 twcss-opacity-0 group-hover:twcss-opacity-100">${item.description}</p>
+                    </div>
+                </div>
+            `;
+            swiperWrapper.appendChild(slide);
         });
+
+        swiperContainer.appendChild(swiperWrapper);
+
+        // Initialize Swiper after the slides are created
+        const mySwiper = new Swiper('.swiper-container', {
+        // Parameters
+        loop: false,
+        pagination: {
+            el: '.swiper-pagination',
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            // when window width is >= 320px
+            320: {
+                slidesPerView:1,
+                spaceBetween: 0,
+            },
+            // when window width is >= 640px
+            640: {
+                slidesPerView: 1.5,
+                spaceBetween: 0,
+            },
+            // when window width is >= 768px (the 'md' breakpoint in Tailwind)
+            768: {
+                slidesPerView: 2.5,
+                spaceBetween: 0,
+            },
+            1048: {
+                slidesPerView: 3.5, // Keep it at 3 or increase if the slider is meant to be wider than the container
+                spaceBetween: 0,
+            }, // tailwind xl and 2xl breakpoints!
+            1536: {
+                slidesPerView: 4.5,
+                spaceBetween: 0,
+            },
+            2048: {
+                slidesPerView: 5.5,
+                spaceBetween: 0,
+            },
+
+        },
+
+        // ... more options as needed ...
     });
-{% endjavascript %}
-<div class="twcss-w-full twcss-overflow-hidden">
-<div class="swiper-container twcss-w-full twcss-h-full twcss-p-24">
-    <div class="swiper-wrapper twcss-gap-4">
-        <div class="swiper-slide">
-            <div class="twcss-relative twcss-max-w-xl twcss-h-[400px] twcss-rounded twcss-overflow-hidden twcss-shadow-lg twcss-group " >
-                <img class=" twcss-absolute twcss-w-full twcss-object-cover twcss-h-full" src="https://cdn.shopify.com/s/files/1/0792/2381/6524/files/webshop.webp" alt="Sunset in the mountains">
-            
-                <div class=" twcss-absolute twcss-bottom-0 twcss-w-full twcss-px-5 twcss-py-10 twcss-pt-20 " style="background: rgba(0,0,0,0.7);clip-path: polygon(0 0, 100% 4rem, 100% 100%, 0 100%);">
-                    <h2 class="twcss-text-4xl twcss-font-semibold twcss-text-white twcss-uppercase ">Realisatie naam</h2>
-                    <p class="twcss-text-gray-300 twcss-text-3xl twcss-mt-1 ">14 nov. 2023</p>
+    }
 
-                    <p class="twcss-text-white twcss-text-2xl twcss-mt-3 twcss-leading-relaxed twcss-text-transparent group-hover:twcss-text-white twcss-h-0 group-hover:twcss-h-[175px] twcss-transition-all twcss-duration-700 twcss-opacity-0 group-hover:twcss-opacity-100">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur a ex est, in delectus maxime, exercitationem magnam minima officiis adipisci temporibus placeat earum, libero quae quam ipsam nisi eos beatae! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur a ex est, in delectus maxime, exercitationem magnam minima officiis adipisci temporibus placeat earum, libero quae quam ipsam nisi eos beatae!</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="swiper-slide">
-            <div class="twcss-relative twcss-max-w-xl twcss-h-[400px] twcss-rounded twcss-overflow-hidden twcss-shadow-lg twcss-group " >
-                <img class=" twcss-absolute twcss-w-full twcss-object-cover twcss-h-full" src="https://cdn.shopify.com/s/files/1/0792/2381/6524/files/webshop.webp" alt="Sunset in the mountains">
-            
-                <div class=" twcss-absolute twcss-bottom-0 twcss-w-full twcss-px-5 twcss-py-10 twcss-pt-20 " style="background: rgba(0,0,0,0.7);clip-path: polygon(0 0, 100% 4rem, 100% 100%, 0 100%);">
-                    <h2 class="twcss-text-4xl twcss-font-semibold twcss-text-white twcss-uppercase ">Realisatie naam</h2>
-                    <p class="twcss-text-gray-300 twcss-text-3xl twcss-mt-1 ">14 nov. 2023</p>
-
-                    <p class="twcss-text-white twcss-text-2xl twcss-mt-3 twcss-leading-relaxed twcss-text-transparent group-hover:twcss-text-white twcss-h-0 group-hover:twcss-h-[175px] twcss-transition-all twcss-duration-700 twcss-opacity-0 group-hover:twcss-opacity-100">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur a ex est, in delectus maxime, exercitationem magnam minima officiis adipisci temporibus placeat earum, libero quae quam ipsam nisi eos beatae! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur a ex est, in delectus maxime, exercitationem magnam minima officiis adipisci temporibus placeat earum, libero quae quam ipsam nisi eos beatae!</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="swiper-slide">
-            <div class="twcss-relative twcss-max-w-xl twcss-h-[400px] twcss-rounded twcss-overflow-hidden twcss-shadow-lg twcss-group " >
-                <img class=" twcss-absolute twcss-w-full twcss-object-cover twcss-h-full" src="https://cdn.shopify.com/s/files/1/0792/2381/6524/files/webshop.webp" alt="Sunset in the mountains">
-            
-                <div class=" twcss-absolute twcss-bottom-0 twcss-w-full twcss-px-5 twcss-py-10 twcss-pt-20 " style="background: rgba(0,0,0,0.7);clip-path: polygon(0 0, 100% 4rem, 100% 100%, 0 100%);">
-                    <h2 class="twcss-text-4xl twcss-font-semibold twcss-text-white twcss-uppercase ">Realisatie naam</h2>
-                    <p class="twcss-text-gray-300 twcss-text-3xl twcss-mt-1 ">14 nov. 2023</p>
-
-                    <p class="twcss-text-white twcss-text-2xl twcss-mt-3 twcss-leading-relaxed twcss-text-transparent group-hover:twcss-text-white twcss-h-0 group-hover:twcss-h-[175px] twcss-transition-all twcss-duration-700 twcss-opacity-0 group-hover:twcss-opacity-100">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur a ex est, in delectus maxime, exercitationem magnam minima officiis adipisci temporibus placeat earum, libero quae quam ipsam nisi eos beatae! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur a ex est, in delectus maxime, exercitationem magnam minima officiis adipisci temporibus placeat earum, libero quae quam ipsam nisi eos beatae!</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="swiper-slide">
-            <div class="twcss-relative twcss-max-w-xl twcss-h-[400px] twcss-rounded twcss-overflow-hidden twcss-shadow-lg twcss-group " >
-                <img class=" twcss-absolute twcss-w-full twcss-object-cover twcss-h-full" src="https://cdn.shopify.com/s/files/1/0792/2381/6524/files/webshop.webp" alt="Sunset in the mountains">
-            
-                <div class=" twcss-absolute twcss-bottom-0 twcss-w-full twcss-px-5 twcss-py-10 twcss-pt-20 " style="background: rgba(0,0,0,0.7);clip-path: polygon(0 0, 100% 4rem, 100% 100%, 0 100%);">
-                    <h2 class="twcss-text-4xl twcss-font-semibold twcss-text-white twcss-uppercase ">Realisatie naam</h2>
-                    <p class="twcss-text-gray-300 twcss-text-3xl twcss-mt-1 ">14 nov. 2023</p>
-
-                    <p class="twcss-text-white twcss-text-2xl twcss-mt-3 twcss-leading-relaxed twcss-text-transparent group-hover:twcss-text-white twcss-h-0 group-hover:twcss-h-[175px] twcss-transition-all twcss-duration-700 twcss-opacity-0 group-hover:twcss-opacity-100">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur a ex est, in delectus maxime, exercitationem magnam minima officiis adipisci temporibus placeat earum, libero quae quam ipsam nisi eos beatae! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur a ex est, in delectus maxime, exercitationem magnam minima officiis adipisci temporibus placeat earum, libero quae quam ipsam nisi eos beatae!</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="swiper-slide">
-            <div class="twcss-relative twcss-max-w-xl twcss-h-[400px] twcss-rounded twcss-overflow-hidden twcss-shadow-lg twcss-group " >
-                <img class=" twcss-absolute twcss-w-full twcss-object-cover twcss-h-full" src="https://cdn.shopify.com/s/files/1/0792/2381/6524/files/webshop.webp" alt="Sunset in the mountains">
-            
-                <div class=" twcss-absolute twcss-bottom-0 twcss-w-full twcss-px-5 twcss-py-10 twcss-pt-20 " style="background: rgba(0,0,0,0.7);clip-path: polygon(0 0, 100% 4rem, 100% 100%, 0 100%);">
-                    <h2 class="twcss-text-4xl twcss-font-semibold twcss-text-white twcss-uppercase ">Realisatie naam</h2>
-                    <p class="twcss-text-gray-300 twcss-text-3xl twcss-mt-1 ">14 nov. 2023</p>
-
-                    <p class="twcss-text-white twcss-text-2xl twcss-mt-3 twcss-leading-relaxed twcss-text-transparent group-hover:twcss-text-white twcss-h-0 group-hover:twcss-h-[175px] twcss-transition-all twcss-duration-700 twcss-opacity-0 group-hover:twcss-opacity-100">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur a ex est, in delectus maxime, exercitationem magnam minima officiis adipisci temporibus placeat earum, libero quae quam ipsam nisi eos beatae! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur a ex est, in delectus maxime, exercitationem magnam minima officiis adipisci temporibus placeat earum, libero quae quam ipsam nisi eos beatae!</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="swiper-slide">
-            <div class="twcss-relative twcss-max-w-xl twcss-h-[400px] twcss-rounded twcss-overflow-hidden twcss-shadow-lg twcss-group " >
-                <img class=" twcss-absolute twcss-w-full twcss-object-cover twcss-h-full" src="https://cdn.shopify.com/s/files/1/0792/2381/6524/files/webshop.webp" alt="Sunset in the mountains">
-            
-                <div class=" twcss-absolute twcss-bottom-0 twcss-w-full twcss-px-5 twcss-py-10 twcss-pt-20 " style="background: rgba(0,0,0,0.7);clip-path: polygon(0 0, 100% 4rem, 100% 100%, 0 100%);">
-                    <h2 class="twcss-text-4xl twcss-font-semibold twcss-text-white twcss-uppercase ">Realisatie naam</h2>
-                    <p class="twcss-text-gray-300 twcss-text-3xl twcss-mt-1 ">14 nov. 2023</p>
-
-                    <p class="twcss-text-white twcss-text-2xl twcss-mt-3 twcss-leading-relaxed twcss-text-transparent group-hover:twcss-text-white twcss-h-0 group-hover:twcss-h-[175px] twcss-transition-all twcss-duration-700 twcss-opacity-0 group-hover:twcss-opacity-100">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur a ex est, in delectus maxime, exercitationem magnam minima officiis adipisci temporibus placeat earum, libero quae quam ipsam nisi eos beatae! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur a ex est, in delectus maxime, exercitationem magnam minima officiis adipisci temporibus placeat earum, libero quae quam ipsam nisi eos beatae!</p>
-                </div>
-            </div>
-        </div>
-    </div>
     
-    <div class="swiper-button-prev"> </div>
-    <div class="swiper-button-next"> </div>
+});
+{% endjavascript %}
+
+<div class="twcss-w-full twcss-overflow-hidden">
+<div class="swiper-container twcss-w-full twcss-h-full twcss-p-24" id="swiper-container">
+
+<div class="swiper-button-prev"> </div>
+<div class="swiper-button-next"> </div>
 </div>
 
-</div>
+</div> 
+

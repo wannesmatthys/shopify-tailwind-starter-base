@@ -1,6 +1,7 @@
 {
   "current": {
-    "logo_width": 90,
+    "logo": "shopify:\/\/shop_images\/logo-ethernum.png",
+    "logo_width": 180,
     "type_header_font": "assistant_n4",
     "heading_scale": 100,
     "type_body_font": "assistant_n4",
@@ -110,6 +111,7 @@
     "currency_code_enabled": true,
     "cart_type": "drawer",
     "show_vendor": false,
+    "show_price": true,
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "sections": {
@@ -355,6 +357,7 @@
       "currency_code_enabled": true,
       "cart_type": "notification",
       "show_vendor": false,
+      "show_price": true,
       "show_cart_note": false,
       "cart_drawer_collection": "",
       "sections": {

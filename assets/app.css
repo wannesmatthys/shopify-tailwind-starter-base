@@ -616,6 +616,10 @@ video {
   height: 100vh;
 }
 
+.twcss-h-96 {
+  height: 24rem;
+}
+
 .twcss-w-full {
   width: 100%;
 }

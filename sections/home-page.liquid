@@ -1,3 +1,23 @@
+{% javascript  %} 
+
+const linkWebshopElement = document.querySelector('#webshop'); // Replace with your actual class or ID
+linkWebshopElement.addEventListener('touchstart', function(event) {
+    window.location.href = '/collections'; // Redirect to the link's href attribute
+});
+
+
+const linkRentalElement = document.querySelector('#rental'); // Replace with your actual class or ID
+linkRentalElement.addEventListener('touchstart', function(event) {
+    window.location.href = '/pages/rental'; // Redirect to the link's href attribute
+});
+
+const linkRealisationsElement = document.querySelector('#realisations'); // Replace with your actual class or ID
+linkRealisationsElement.addEventListener('touchstart', function(event) {
+    window.location.href = '/pages/contact'; // Redirect to the link's href attribute
+});
+
+{% endjavascript %}
+
 <main class="twcss-flex twcss-flex-col lg:twcss-flex-row twcss-h-screen lg:twcss-h-auto twcss-relative twcss-overflow-hidden">
 
     <style> 
@@ -7,11 +27,10 @@
         }
     </style>
 
-  <h1 class="twcss-fixed twcss-left-1/2 -twcss-translate-x-1/2 !twcss-font-bold !twcss-text-white twcss-z-50 twcss-text-6xl lg:twcss-text-7xl twcss-top-12">
-    ETHERNUM
-  </h1>
+  <img src="https://cdn.shopify.com/s/files/1/0792/2381/6524/files/white_textlogo_transparent_background.png?v=1702889783" class="twcss-h-96 twcss-z-100 twcss-fixed twcss-left-1/2 -twcss-translate-x-1/2 !twcss-font-bold !twcss-text-white twcss-z-50 twcss-text-6xl lg:twcss-text-7xl twcss-top-0" />
+    
 
-  <a href="/collections" class="lg:twcss-h-screen twcss-h-1/3 twcss-relative twcss-cursor-pointer lg:twcss-w-1/3 lg:hover:twcss-w-1/2 twcss-group twcss-transition-all twcss-duration-1000">
+  <a href="/collections" id="webshop" class="lg:twcss-h-screen twcss-h-1/3 twcss-relative twcss-cursor-pointer lg:twcss-w-1/3 lg:hover:twcss-w-1/2 twcss-group twcss-transition-all twcss-duration-1000">
       <figure class="twcss-relative twcss-w-full twcss-h-full">
           <img src="https://cdn.shopify.com/s/files/1/0792/2381/6524/files/webshop.webp" alt="webshop" class="twcss-w-full twcss-h-full lg:twcss-h-screen twcss-object-cover twcss-transition-all twcss-duration-1000" />
           <span class="twcss-w-full twcss-h-full lg:twcss-h-screen twcss-bg-slate-900/30 group-hover:twcss-bg-slate-900/0 twcss-absolute twcss-top-0 twcss-transition twcss-duration-700"></span>
@@ -25,7 +44,7 @@
       </figcaption>
   </a>
 
-  <a href="/collections" class="lg:twcss-h-screen twcss-h-1/3 twcss-relative twcss-cursor-pointer lg:twcss-w-1/3 lg:hover:twcss-w-1/2 twcss-group twcss-transition-all twcss-duration-1000">
+  <a href="/collections/verhuur" id="rental" class="lg:twcss-h-screen twcss-h-1/3 twcss-relative twcss-cursor-pointer lg:twcss-w-1/3 lg:hover:twcss-w-1/2 twcss-group twcss-transition-all twcss-duration-1000">
       <figure class="twcss-relative twcss-w-full twcss-h-full">
           <img src="https://cdn.shopify.com/s/files/1/0792/2381/6524/files/rental.webp" alt="rental" class="twcss-w-full twcss-h-full lg:twcss-h-screen  twcss-object-cover twcss-transition-all twcss-duration-1000" />
           <span class="twcss-w-full twcss-h-full lg:twcss-h-screen twcss-bg-slate-900/30 group-hover:twcss-bg-slate-900/0 twcss-absolute twcss-top-0 twcss-transition twcss-duration-700"></span>
@@ -39,7 +58,7 @@
       </figcaption>
   </a>
 
-  <a href="/collections" class="lg:twcss-h-screen twcss-h-1/3 twcss-relative twcss-cursor-pointer lg:twcss-w-1/3 lg:hover:twcss-w-1/2 twcss-group twcss-transition-all twcss-duration-1000">
+  <a href="/pages/contact" id="realisations" class="lg:twcss-h-screen twcss-h-1/3 twcss-relative twcss-cursor-pointer lg:twcss-w-1/3 lg:hover:twcss-w-1/2 twcss-group twcss-transition-all twcss-duration-1000">
       <figure class="twcss-relative twcss-w-full twcss-h-full">
           <img src="https://cdn.shopify.com/s/files/1/0792/2381/6524/files/realisations.webp" alt="realisations" class="twcss-w-full twcss-h-full lg:twcss-h-screen  twcss-object-cover twcss-transition-all twcss-duration-1000" />
           <span class="twcss-w-full twcss-h-full lg:twcss-h-screen twcss-bg-slate-900/30 group-hover:twcss-bg-slate-900/0 twcss-absolute twcss-top-0 twcss-transition twcss-duration-700"></span>

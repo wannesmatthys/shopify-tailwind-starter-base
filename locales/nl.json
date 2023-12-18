@@ -245,7 +245,7 @@
     "contact": {
       "form": {
         "name": "Naam",
-        "email": "E‑mail",
+        "email": "E‑mailadres",
         "phone": "Telefoonnummer",
         "comment": "Mededeling",
         "send": "Sturen",

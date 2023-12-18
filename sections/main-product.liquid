@@ -424,7 +424,9 @@
               {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
             {%- when 'buy_buttons' -%}
               {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
-            {%- when 'rating' -%}
+            {%- when 'contact_buttons' -%}
+              {%- render 'contact-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id -%}
+              {%- when 'rating' -%}
               {%- if product.metafields.reviews.rating.value != blank -%}
                 {% liquid
                   assign rating_decimal = 0
@@ -851,6 +853,11 @@
           "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
         }
       ]
+    },
+    {
+      "type": "contact_buttons",
+      "name": "t:sections.main-product.blocks.contact_buttons.name",
+      "limit": 1
     },
     {
       "type": "description",

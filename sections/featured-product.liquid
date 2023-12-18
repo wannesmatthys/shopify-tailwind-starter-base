@@ -470,6 +470,13 @@
                   product_form_id: product_form_id,
                   section_id: section.id
                 -%}
+              {%- when 'contact_buttons' -%}
+                  {%- render 'contact-buttons',
+                    block: block,
+                    product: product,
+                    product_form_id: product_form_id,
+                    section_id: section.id
+                  -%}
               {%- when 'custom_liquid' -%}
                 {{ block.settings.custom_liquid }}
               {%- when 'rating' -%}
@@ -855,6 +862,11 @@
           "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
         }
       ]
+    },
+    {
+      "type": "contact_buttons",
+      "name": "t:sections.featured-product.blocks.contact_buttons.name",
+      "limit": 1
     },
     {
       "type": "share",
@@ -1682,6 +1694,9 @@
         },
         {
           "type": "buy_buttons"
+        },
+        {
+          "type": "contact_buttons"
         },
         {
           "type": "share"
