@@ -1,305 +1,186 @@
 {% javascript %}
-    let imageGallery;
+  let imageGallery;
+  let title;
+  let description;
+  let productModal;
 
-    function init() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const projectId = urlParams.get('project');
-
-      imageGallery = document.querySelector("#nwn-image-gallery");
-
-      fetchProject(projectId);
-    }
-
-    function fetchProject(id) {
-      console.log("Fetching project", id);
-
-
-      fetch(`https://ethernum.nwnsoftware.be/api/realisations/${id}`) // Replace with the URL provided by your Shopify app or middleware
-            .then(response => response.json())
-            .then(data => {
-                console.log('data', data);
-
-                /* saveToLocalStorage('realisations', data, 1000 * 60 * 60 * 24); 
-                createSwiperSlides(data); */
-              let html = "";
-
-              console.log('test');
-              // TODO: Add thumbnail to images here
-
-              data.images.forEach((image) => {
-                html += getImageHtml(image.url);
-              });
-
-              imageGallery.innerHTML = html;
-            })
-            .catch(error => console.error('Error:', error));
-    }
-
-    function getImageHtml(imageUrl) {
-      return `
-      <li id="Slide-template--20268139774284__main-45113543688524" class="product__media-item grid__item slider__slide is-active scroll-trigger animate--fade-in" data-media-id="template--20268139774284__main-45113543688524">
-
-<div class="product-media-container media-type-image media-fit-contain global-media-settings gradient constrain-height" style="--ratio: 1.5; --preview-ratio: 1.5;">
-<noscript><div class="product__media media">
-    <img src="${imageUrl}" width="1946" height="1297" sizes="(min-width: 1200px) 715px, (min-width: 990px) calc(65.0vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / 1 - 4rem)">
-  </div></noscript>
-
-<modal-opener class="product__modal-opener product__modal-opener--image no-js-hidden" data-modal="#ProductModal-template--20268139774284__main">
-{% comment %} <span class="product__media-icon motion-reduce quick-add-hidden product__media-icon--lightbox" aria-hidden="true"><svg aria-hidden="true" focusable="false" class="icon icon-plus" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"> {% endcomment %}
-<path fill-rule="evenodd" clip-rule="evenodd" d="M4.66724 7.93978C4.66655 7.66364 4.88984 7.43922 5.16598 7.43853L10.6996 7.42464C10.9758 7.42395 11.2002 7.64724 11.2009 7.92339C11.2016 8.19953 10.9783 8.42395 10.7021 8.42464L5.16849 8.43852C4.89235 8.43922 4.66793 8.21592 4.66724 7.93978Z" fill="currentColor"></path>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M7.92576 4.66463C8.2019 4.66394 8.42632 4.88723 8.42702 5.16337L8.4409 10.697C8.44159 10.9732 8.2183 11.1976 7.94215 11.1983C7.66601 11.199 7.44159 10.9757 7.4409 10.6995L7.42702 5.16588C7.42633 4.88974 7.64962 4.66532 7.92576 4.66463Z" fill="currentColor"></path>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M12.8324 3.03011C10.1255 0.323296 5.73693 0.323296 3.03011 3.03011C0.323296 5.73693 0.323296 10.1256 3.03011 12.8324C5.73693 15.5392 10.1255 15.5392 12.8324 12.8324C15.5392 10.1256 15.5392 5.73693 12.8324 3.03011ZM2.32301 2.32301C5.42035 -0.774336 10.4421 -0.774336 13.5395 2.32301C16.6101 5.39361 16.6366 10.3556 13.619 13.4588L18.2473 18.0871C18.4426 18.2824 18.4426 18.599 18.2473 18.7943C18.0521 18.9895 17.7355 18.9895 17.5402 18.7943L12.8778 14.1318C9.76383 16.6223 5.20839 16.4249 2.32301 13.5395C-0.774335 10.4421 -0.774335 5.42035 2.32301 2.32301Z" fill="currentColor"></path>
-</svg>
-</span>
-<div class="loading-overlay__spinner hidden">
-  <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-    <circle class="path" fill="none" stroke-width="4" cx="33" cy="33" r="30"></circle>
-  </svg>
-</div>
-<div class="product__media media media--transparent">
-  <img src="${imageUrl}" width="1946" height="1297" class="image-magnify-lightbox" sizes="(min-width: 1200px) 715px, (min-width: 990px) calc(65.0vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / 1 - 4rem)">
-</div>
-<button class="product__media-toggle quick-add-hidden product__media-zoom-lightbox" type="button" aria-haspopup="dialog" data-media-id="45113543688524">
-  <span class="visually-hidden">
-    Media 1 openen in modaal
-  </span>
-</button>
-</modal-opener></div>
-
-      </li>
-      `;
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      console.log('initiaing');
-      init();
-    })
-{% endjavascript %}
-
-<main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
-  <section id="shopify-section-template--20268139774284__main" class="shopify-section section"><section id="MainProduct-template--20268139774284__main" class="page-width section-template--20268139774284__main-padding" data-section="template--20268139774284__main">
-<link href="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/section-main-product.css?v=149518454282510145501701096400" rel="stylesheet" type="text/css" media="all">
-<link href="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/component-accordion.css?v=180964204318874863811701096400" rel="stylesheet" type="text/css" media="all">
-<link href="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/component-price.css?v=70172745017360139101701096401" rel="stylesheet" type="text/css" media="all">
-<link href="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/component-slider.css?v=2755748339419356901701096404" rel="stylesheet" type="text/css" media="all">
-<link href="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/component-rating.css?v=132946792511282047701701096401" rel="stylesheet" type="text/css" media="all">
-<link href="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/component-loading-overlay.css?v=58800470094666109841701096403" rel="stylesheet" type="text/css" media="all">
-<link href="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/component-deferred-media.css?v=58154447184650310061701096396" rel="stylesheet" type="text/css" media="all">
-<style data-shopify="">.section-template--20268139774284__main-padding {
-  padding-top: 27px;
-  padding-bottom: 9px;
-}
-
-@media screen and (min-width: 750px) {
-  .section-template--20268139774284__main-padding {
-    padding-top: 36px;
-    padding-bottom: 12px;
-  }
-}</style><script src="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/product-info.js?v=66221267807649136831701096402" defer="defer"></script>
-<script src="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/product-form.js?v=111103202726528525511701096402" defer="defer"></script>
-
-
-<div class="product product--large product--left product--stacked product--mobile-hide grid grid--1-col grid--2-col-tablet">
-<div class="grid__item product__media-wrapper">
-  
-<media-gallery id="MediaGallery-template--20268139774284__main" role="region" class="product__column-sticky" aria-label="Gallery-weergave" data-desktop-layout="stacked">
-<div id="GalleryStatus-template--20268139774284__main" class="visually-hidden" role="status"></div>
-<slider-component id="GalleryViewer-template--20268139774284__main" class="slider-mobile-gutter"><a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-template--20268139774284__main">
-    Ga direct naar productinformatie
-  </a><ul id="nwn-image-gallery" class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile" role="list">
-    {% comment %} IMAGES COME HERE {% endcomment %}
-  </ul><div class="slider-buttons no-js-hidden quick-add-hidden">
-    <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="Naar links schuiven" disabled="disabled">
-      <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
-</path></svg>
-
-    </button>
-    <div class="slider-counter caption">
-      <span class="slider-counter--current">NaN</span>
-      <span aria-hidden="true"> / </span>
-      <span class="visually-hidden">van</span>
-      <span class="slider-counter--total">-Infinity</span>
-    </div>
-    <button type="button" class="slider-button slider-button--next" name="next" aria-label="Naar rechts schuiven">
-      <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
-</path></svg>
-
-    </button>
-  </div></slider-component></media-gallery>
-
-</div>
-<div class="product__info-wrapper grid__item scroll-trigger animate--slide-in">
-  <product-info id="ProductInfo-template--20268139774284__main" data-section="template--20268139774284__main" data-url="/products/copy-of-sample-coconut-bar-soap-1" class="product__info-container product__column-sticky"><p class="product__text inline-richtext caption-with-letter-spacing">Ethernum</p><div class="product__title">
-            <h1>Copy of (Sample) Coconut Bar Soap</h1>
-            <a href="/products/copy-of-sample-coconut-bar-soap-1" class="product__title">
-              <h2 class="h1">
-                Copy of (Sample) Coconut Bar Soap
-              </h2>
-            </a>
-          </div><div class="no-js-hidden" id="price-template--20268139774284__main" role="status">
-<div class="
-price price--large price--on-sale price--show-badge">
-<div class="price__container"><div class="price__regular"><span class="visually-hidden visually-hidden--inline">Normale prijs</span>
-    <span class="price-item price-item--regular">
-      €9,95 EUR
-    </span></div>
-<div class="price__sale">
-    <span class="visually-hidden visually-hidden--inline">Normale prijs</span>
-    <span>
-      <s class="price-item price-item--regular">
-        
-          €14,95 EUR
-        
-      </s>
-    </span><span class="visually-hidden visually-hidden--inline">Aanbiedingsprijs</span>
-  <span class="price-item price-item--sale price-item--last">
-    €9,95 EUR
-  </span>
-</div>
-<small class="unit-price caption hidden">
-  <span class="visually-hidden">Eenheidsprijs</span>
-  <span class="price-item price-item--last">
-    <span></span>
-    <span aria-hidden="true">/</span>
-    <span class="visually-hidden">&nbsp;per&nbsp;</span>
-    <span>
-    </span>
-  </span>
-</small>
-</div><span class="badge price__badge-sale color-accent-2">
-  Korting
-</span>
-
-<span class="badge price__badge-sold-out color-inverse">
-  Uitverkocht
-</span></div>
-</div><div class="product__tax caption rte">Inclusief btw.
-
-</div>
-          <div><form method="post" action="/cart/add" id="product-form-installment-template--20268139774284__main" accept-charset="UTF-8" class="installment caption-large" enctype="multipart/form-data"><input type="hidden" name="form_type" value="product"><input type="hidden" name="utf8" value="✓"><input type="hidden" name="id" value="47396904632652">
-              
-<input type="hidden" name="product-id" value="8776128987468"></form></div><p class="product__text inline-richtext subtitle"></p>
-<noscript class="product-form__noscript-wrapper-template--20268139774284__main">
-<div class="product-form__input hidden">
-<label class="form__label" for="Variants-template--20268139774284__main">Productvarianten</label>
-<div class="select">
-  <select
-    name="id"
-    id="Variants-template--20268139774284__main"
-    class="select__select"
-    form="product-form-template--20268139774284__main"
-  ><option
-        
-          selected="selected"
-        
-        
-        value="47396904632652"
-      >Default Title - €9,95</option></select>
-  <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
-</svg>
-
-</div>
-</div>
-</noscript>
-
-
-
-<div>
-
-<div class="product-form">
-  <div class="product-form__buttons form">
-    <button type="submit" name="add" class="product-form__submit button button--full-width button--primary">
-      Contacteer ons
-    </button>
-  </div>
-</div>
-
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-const contactButton = document.querySelector('.product-form__submit');
-const productDetails = {"id":8776128987468,"title":"Copy of (Sample) Coconut Bar Soap","handle":"copy-of-sample-coconut-bar-soap-1","description":"Coconut Bar Soap is perfect for everyday cleansing. It's handmade in small batches using traditional methods and gentle enough for daily use. A more natural alternative to commercial soap.\u003cbr data-mce-fragment=\"1\"\u003e \u003cbr data-mce-fragment=\"1\"\u003eFeatures: \u003cbr data-mce-fragment=\"1\"\u003e\n\u003cul\u003e\n\u003cli\u003eHandmade in small batches with organic coconut oil and shea\u003c\/li\u003e\n\u003cli\u003eNo parabens, synthetic fragrances, or chemicals\u003c\/li\u003e\n\u003cli\u003eGentle enough for daily use\u003c\/li\u003e\n\u003cli\u003eSuitable for sensitive skin\u003c\/li\u003e\n\u003cli\u003eVegan friendly and cruelty-free\u003c\/li\u003e\n\u003c\/ul\u003e","published_at":"2023-11-28T08:37:32+01:00","created_at":"2023-11-28T08:37:32+01:00","vendor":"Ethernum","type":"","tags":["Sample Product"],"price":995,"price_min":995,"price_max":995,"available":true,"price_varies":false,"compare_at_price":1495,"compare_at_price_min":1495,"compare_at_price_max":1495,"compare_at_price_varies":false,"variants":[{"id":47396904632652,"title":"Default Title","option1":"Default Title","option2":null,"option3":null,"sku":null,"requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Copy of (Sample) Coconut Bar Soap","public_title":null,"options":["Default Title"],"price":995,"weight":0,"compare_at_price":1495,"inventory_management":"shopify","barcode":null,"requires_selling_plan":false,"selling_plan_allocations":[]}],"images":["\/\/aebd55-3.myshopify.com\/cdn\/shop\/files\/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371","\/\/aebd55-3.myshopify.com\/cdn\/shop\/files\/pexels-pixabay-164938_compressed.jpg?v=1702914127","\/\/aebd55-3.myshopify.com\/cdn\/shop\/files\/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126"],"featured_image":"\/\/aebd55-3.myshopify.com\/cdn\/shop\/files\/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371","options":["Title"],"media":[{"alt":null,"id":45113543688524,"position":1,"preview_image":{"aspect_ratio":1.5,"height":4000,"width":6000,"src":"\/\/aebd55-3.myshopify.com\/cdn\/shop\/files\/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371"},"aspect_ratio":1.5,"height":4000,"media_type":"image","src":"\/\/aebd55-3.myshopify.com\/cdn\/shop\/files\/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371","width":6000},{"alt":null,"id":45114258358604,"position":2,"preview_image":{"aspect_ratio":1.651,"height":1080,"width":1783,"src":"\/\/aebd55-3.myshopify.com\/cdn\/shop\/files\/pexels-pixabay-164938_compressed.jpg?v=1702914127"},"aspect_ratio":1.651,"height":1080,"media_type":"image","src":"\/\/aebd55-3.myshopify.com\/cdn\/shop\/files\/pexels-pixabay-164938_compressed.jpg?v=1702914127","width":1783},{"alt":null,"id":45114258391372,"position":3,"preview_image":{"aspect_ratio":1.5,"height":1080,"width":1620,"src":"\/\/aebd55-3.myshopify.com\/cdn\/shop\/files\/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126"},"aspect_ratio":1.5,"height":1080,"media_type":"image","src":"\/\/aebd55-3.myshopify.com\/cdn\/shop\/files\/voice-video-ltx5OlhZ4Is-unsplash_compressed.jpg?v=1702914126","width":1620}],"requires_selling_plan":false,"selling_plan_groups":[],"content":"Coconut Bar Soap is perfect for everyday cleansing. It's handmade in small batches using traditional methods and gentle enough for daily use. A more natural alternative to commercial soap.\u003cbr data-mce-fragment=\"1\"\u003e \u003cbr data-mce-fragment=\"1\"\u003eFeatures: \u003cbr data-mce-fragment=\"1\"\u003e\n\u003cul\u003e\n\u003cli\u003eHandmade in small batches with organic coconut oil and shea\u003c\/li\u003e\n\u003cli\u003eNo parabens, synthetic fragrances, or chemicals\u003c\/li\u003e\n\u003cli\u003eGentle enough for daily use\u003c\/li\u003e\n\u003cli\u003eSuitable for sensitive skin\u003c\/li\u003e\n\u003cli\u003eVegan friendly and cruelty-free\u003c\/li\u003e\n\u003c\/ul\u003e"};
-
-contactButton.addEventListener('click', function() {
-  localStorage.setItem('selectedProductDetails', JSON.stringify(productDetails));
-  window.location.href = "/pages/contact#form";
-});
-});
-</script>
-<div class="product__description rte quick-add-hidden">
-              Coconut Bar Soap is perfect for everyday cleansing. It's handmade in small batches using traditional methods and gentle enough for daily use. A more natural alternative to commercial soap.<br data-mce-fragment="1"> <br data-mce-fragment="1">Features: <br data-mce-fragment="1">
-<ul>
-<li>Handmade in small batches with organic coconut oil and shea</li>
-<li>No parabens, synthetic fragrances, or chemicals</li>
-<li>Gentle enough for daily use</li>
-<li>Suitable for sensitive skin</li>
-<li>Vegan friendly and cruelty-free</li>
-</ul>
-            </div><a href="/products/copy-of-sample-coconut-bar-soap-1" class="link product__view-details animate-arrow">
-      Alle details bekijken
-      <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" class="icon icon-arrow" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
-</path></svg>
-
-    </a>
-  </product-info>
-</div></div>
-
-<script src="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/product-modal.js?v=132575917445348640851701096402" defer="defer"></script>
-<script src="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/media-gallery.js?v=95758955085303843141701096400" defer="defer"></script><script>
-document.addEventListener('DOMContentLoaded', function () {
-  function isIE() {
-    const ua = window.navigator.userAgent;
-    const msie = ua.indexOf('MSIE ');
-    const trident = ua.indexOf('Trident/');
-
-    return msie > 0 || trident > 0;
+  function init() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const projectId = urlParams.get('project');
+    imageGallery = document.querySelector("#nwn-image-gallery");
+    description = document.querySelector("#product-info");
+    title = document.querySelector("#product-title");
+    productModal = document.querySelector("#product-modal");
+    fetchProject(projectId);
   }
 
-  if (!isIE()) return;
-  const hiddenInput = document.querySelector('#product-form-template--20268139774284__main input[name="id"]');
-  const noScriptInputWrapper = document.createElement('div');
-  const variantSwitcher =
-    document.querySelector('variant-radios[data-section="template--20268139774284__main"]') ||
-    document.querySelector('variant-selects[data-section="template--20268139774284__main"]');
-  noScriptInputWrapper.innerHTML = document.querySelector(
-    '.product-form__noscript-wrapper-template--20268139774284__main'
-  ).textContent;
-  variantSwitcher.outerHTML = noScriptInputWrapper.outerHTML;
+  function fetchProject(id) {
+    fetch(`https://ethernum.nwnsoftware.be/api/realisations/${id}`) // Replace with the URL provided by your Shopify app or middleware
+      .then(response => response.json())
+      .then(data => {
+        console.log('data', data);
+        /* saveToLocalStorage('realisations', data, 1000 * 60 * 60 * 24); 
+        createSwiperSlides(data); */
+        let html = "";
+        let modalHtml = "";
 
-  document.querySelector('#Variants-template--20268139774284__main').addEventListener('change', function (event) {
-    hiddenInput.value = event.currentTarget.value;
+        console.log('test');
+        // TODO: Add thumbnail to images here
+        html += getImageHtml(data.thumbnail.url);
+        modalHtml += getModalHtml(data.thumbnail.url, data.title);
+
+        data.images.forEach((image) => {
+          html += getImageHtml(image.url, image.alt);
+          modalHtml += getModalHtml(image.url, image.alt);
+        });
+        imageGallery.innerHTML = html;
+        description.innerHTML = data.description;
+        title.innerHTML = data.title;
+        productModal.innerHTML = modalHtml;
+      })
+      .catch(error => console.error('Error:', error));
+  }
+
+  function getModalHtml(imageUrl, alt) {
+    return `<img class="global-media-settings global-media-settings--no-shadow" srcset="${imageUrl}" alt="${alt}" />`;
+  }
+
+  function getImageHtml(imageUrl, alt) {
+    return `
+    <li id="Slide-template--20268139872588__main-45113543688524" class="product__media-item grid__item slider__slide is-active scroll-trigger animate--fade-in" data-media-id="template--20268139872588__main-45113543688524">
+      <div class="product-media-container media-type-image media-fit-contain global-media-settings gradient constrain-height" style="--ratio: 1.5; --preview-ratio: 1.5;">
+        <noscript>
+          <div class="product__media media">
+            <img src="${imageUrl}" alt="${alt}" width="1946" height="1297" sizes="(min-width: 1200px) 715px, (min-width: 990px) calc(65.0vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / 1 - 4rem)">
+          </div>
+        </noscript>
+        <modal-opener class="product__modal-opener product__modal-opener--image no-js-hidden" data-modal="#ProductModal-template--20268139872588__main">
+          <span class="product__media-icon motion-reduce quick-add-hidden product__media-icon--lightbox" aria-hidden="true">
+            <svg aria-hidden="true" focusable="false" class="icon icon-plus" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M4.66724 7.93978C4.66655 7.66364 4.88984 7.43922 5.16598 7.43853L10.6996 7.42464C10.9758 7.42395 11.2002 7.64724 11.2009 7.92339C11.2016 8.19953 10.9783 8.42395 10.7021 8.42464L5.16849 8.43852C4.89235 8.43922 4.66793 8.21592 4.66724 7.93978Z" fill="currentColor"></path>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M7.92576 4.66463C8.2019 4.66394 8.42632 4.88723 8.42702 5.16337L8.4409 10.697C8.44159 10.9732 8.2183 11.1976 7.94215 11.1983C7.66601 11.199 7.44159 10.9757 7.4409 10.6995L7.42702 5.16588C7.42633 4.88974 7.64962 4.66532 7.92576 4.66463Z" fill="currentColor"></path>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12.8324 3.03011C10.1255 0.323296 5.73693 0.323296 3.03011 3.03011C0.323296 5.73693 0.323296 10.1256 3.03011 12.8324C5.73693 15.5392 10.1255 15.5392 12.8324 12.8324C15.5392 10.1256 15.5392 5.73693 12.8324 3.03011ZM2.32301 2.32301C5.42035 -0.774336 10.4421 -0.774336 13.5395 2.32301C16.6101 5.39361 16.6366 10.3556 13.619 13.4588L18.2473 18.0871C18.4426 18.2824 18.4426 18.599 18.2473 18.7943C18.0521 18.9895 17.7355 18.9895 17.5402 18.7943L12.8778 14.1318C9.76383 16.6223 5.20839 16.4249 2.32301 13.5395C-0.774335 10.4421 -0.774335 5.42035 2.32301 2.32301Z" fill="currentColor"></path>
+            </svg>
+          </span>
+          <div class="loading-overlay__spinner hidden">
+            <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+              <circle class="path" fill="none" stroke-width="4" cx="33" cy="33" r="30"></circle>
+            </svg>
+          </div>
+          <div class="product__media media media--transparent">
+            <img src="${imageUrl}" alt="${alt}" width="1946" height="1297" class="image-magnify-lightbox" sizes="(min-width: 1200px) 715px, (min-width: 990px) calc(65.0vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw / 1 - 4rem)">
+          </div>
+          <button class="product__media-toggle quick-add-hidden product__media-zoom-lightbox" type="button" aria-haspopup="dialog" data-media-id="45113543688524">
+          <span class="visually-hidden">
+          Media 1 openen in modaal
+          </span>
+          </button>
+        </modal-opener>
+      </div>
+    </li>
+    `;
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    init();
   });
-});
-</script><script type="application/ld+json">
-{
-  "@context": "http://schema.org/",
-  "@type": "Product",
-  "name": "Copy of (Sample) Coconut Bar Soap",
-  "url": "https:\/\/aebd55-3.myshopify.com\/products\/copy-of-sample-coconut-bar-soap-1",
-  "image": [
-      "https:\/\/aebd55-3.myshopify.com\/cdn\/shop\/files\/voice-video-ltx5OlhZ4Is-unsplash.jpg?v=1702909371\u0026width=1920"
-    ],
-  "description": "Coconut Bar Soap is perfect for everyday cleansing. It's handmade in small batches using traditional methods and gentle enough for daily use. A more natural alternative to commercial soap. Features: \n\nHandmade in small batches with organic coconut oil and shea\nNo parabens, synthetic fragrances, or chemicals\nGentle enough for daily use\nSuitable for sensitive skin\nVegan friendly and cruelty-free\n",
-  
-  "brand": {
-    "@type": "Brand",
-    "name": "Ethernum"
-  },
-  "offers": [{
-        "@type" : "Offer","availability" : "http://schema.org/InStock",
-        "price" : 9.95,
-        "priceCurrency" : "EUR",
-        "url" : "https:\/\/aebd55-3.myshopify.com\/products\/copy-of-sample-coconut-bar-soap-1?variant=47396904632652"
-      }
-]
-}
-</script>
-</section>
 
-</section>
-</main>
+{% endjavascript %}
+  <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+    <section id="shopify-section-template--20268139872588__main" class="shopify-section section">
+      <section id="MainProduct-template--20268139872588__main" class="page-width section-template--20268139872588__main-padding" data-section="template--20268139872588__main">
+        <link href="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/section-main-product.css?v=149518454282510145501701096400" rel="stylesheet" type="text/css" media="all">
+        <link href="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/component-accordion.css?v=180964204318874863811701096400" rel="stylesheet" type="text/css" media="all">
+        <link href="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/component-price.css?v=70172745017360139101701096401" rel="stylesheet" type="text/css" media="all">
+        <link href="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/component-slider.css?v=2755748339419356901701096404" rel="stylesheet" type="text/css" media="all">
+        <link href="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/component-rating.css?v=132946792511282047701701096401" rel="stylesheet" type="text/css" media="all">
+        <link href="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/component-loading-overlay.css?v=58800470094666109841701096403" rel="stylesheet" type="text/css" media="all">
+        <link href="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/component-deferred-media.css?v=58154447184650310061701096396" rel="stylesheet" type="text/css" media="all">
+        <style data-shopify="">.section-template--20268139872588__main-padding {
+          padding-top: 27px;
+          padding-bottom: 9px;
+          }
+          @media screen and (min-width: 750px) {
+          .section-template--20268139872588__main-padding {
+          padding-top: 36px;
+          padding-bottom: 12px;
+          }
+          }
+        </style>
+        <script src="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/product-info.js?v=66221267807649136831701096402" defer="defer"></script>
+        <script src="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/product-form.js?v=111103202726528525511701096402" defer="defer"></script>
+        <div class="product product--left product--stacked product--mobile-hide grid grid--1-col grid--2-col-tablet">
+          <div class="grid__item product__media-wrapper">
+            <media-gallery id="MediaGallery-template--20268139872588__main" role="region" class="product__column-sticky" aria-label="Gallery-weergave" data-desktop-layout="stacked">
+              <div id="GalleryStatus-template--20268139872588__main" class="visually-hidden" role="status"></div>
+              <slider-component id="GalleryViewer-template--20268139872588__main" class="slider-mobile-gutter">
+                <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-template--20268139872588__main">
+                Ga direct naar productinformatie
+                </a>
+                <ul id="nwn-image-gallery" class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile" role="list">
+                  {% comment %} IMAGES COME HERE {% endcomment %}
+                </ul>
+              </slider-component>
+
+              
+            </media-gallery>
+
+            
+
+          </div>
+          <div class="product__info-wrapper grid__item scroll-trigger animate--slide-in">
+            <product-info id="ProductInfo-template--20268139872588__main" data-section="template--20268139872588__main" data-url="/products/copy-of-sample-coconut-bar-soap-1" class="product__info-container product__column-sticky">
+              <p class="product__text inline-richtext caption-with-letter-spacing">Ethernum</p>
+              <div class="product__title">
+                <h1 id="product-title"></h1>
+              </div>
+              </noscript>
+              <div>
+              </div>
+              <div class="product__description rte quick-add-hidden" id="product-info">
+              </div>
+            </product-info>
+          </div>
+        </div>
+
+        <product-modal id="ProductModal-template--20268139872588__main" class="product-media-modal media-modal" >
+                  <div class="product-media-modal__dialog" role="dialog" aria-label="Mediagalerij" aria-modal="true" tabindex="-1">
+                    <button id="ModalClose-template--20268139872588__main" type="button" class="product-media-modal__toggle" aria-label="Sluiten">
+                      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="icon icon-close" fill="none" viewBox="0 0 18 17">
+                  <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
+                </path></svg>
+
+                    </button>
+
+                    <div class="product-media-modal__content color-background-1 gradient" role="document" aria-label="Mediagalerij" id="product-modal" tabindex="0">
+                  </div>
+        </product-modal>
+        <script src="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/product-modal.js?v=132575917445348640851701096402" defer="defer"></script>
+        <script src="//aebd55-3.myshopify.com/cdn/shop/t/2/assets/media-gallery.js?v=95758955085303843141701096400" defer="defer"></script><script>
+          document.addEventListener('DOMContentLoaded', function () {
+            function isIE() {
+              const ua = window.navigator.userAgent;
+              const msie = ua.indexOf('MSIE ');
+              const trident = ua.indexOf('Trident/');
+          
+              return msie > 0 || trident > 0;
+            }
+          
+            if (!isIE()) return;
+            const hiddenInput = document.querySelector('#product-form-template--20268139872588__main input[name="id"]');
+            const noScriptInputWrapper = document.createElement('div');
+            const variantSwitcher =
+              document.querySelector('variant-radios[data-section="template--20268139872588__main"]') ||
+              document.querySelector('variant-selects[data-section="template--20268139872588__main"]');
+            noScriptInputWrapper.innerHTML = document.querySelector(
+              '.product-form__noscript-wrapper-template--20268139872588__main'
+            ).textContent;
+            variantSwitcher.outerHTML = noScriptInputWrapper.outerHTML;
+          
+            document.querySelector('#Variants-template--20268139872588__main').addEventListener('change', function (event) {
+              hiddenInput.value = event.currentTarget.value;
+            });
+          });
+        </script>
+      </section>
+    </section>
+  </main>
