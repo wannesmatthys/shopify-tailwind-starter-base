@@ -371,9 +371,12 @@ class EgWishlistDrawer extends HTMLElement {
     if (wishlist) {
       let buildProductListItems = '';
 
+      let total = 0;
+
       wishlist.forEach((product) => {
+        total += product.price;
         buildProductListItems += `
-                    <li class="eg-wishlist-drawer-product-list-item">
+                    <li class="eg-wishlist-drawer-product-list-item" style="height:fit-content">
                         <a href="${product.url}" class="">
                             <img 
                                 class="wishlist-item__image img-fluid" 
@@ -422,6 +425,22 @@ class EgWishlistDrawer extends HTMLElement {
                     </li>
                 `;
       });
+
+      buildProductListItems += `
+      <li class="eg-wishlist-drawer-product-list-item" style="display:block; height:fit-content; margin-top:auto; padding-bottom: 2rem">
+        <div style="float:right; padding-bottom: 2rem">
+          <strong>Totaal:</strong> <span>${formatMoney(total)}</span>
+        </div>
+        <button
+          type="submit"
+          name="add"
+          class="product-form__submit button button--full-width button--primary"
+        >
+          Contacteer ons
+        </button>
+      </li>
+      
+      `;
 
       drawer.querySelector('.eg-wishlist-drawer-product-list').innerHTML =
         buildProductListItems;

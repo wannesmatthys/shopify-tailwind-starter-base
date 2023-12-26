@@ -40,7 +40,7 @@
                                     <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor"></path>
                                 </svg>
                             </button>
-                            <a href="{{ routes.all_products_collection_url }}" class="button">
+                            <a href="/collections/verhuur" class="button">
                                 {{ 'general.continue_shopping' | t }}
                             </a>
                         </div>
@@ -57,12 +57,19 @@
                             </svg>
                         </button>
                     </div>
-                    <ul class="eg-wishlist-drawer-product-list" aria-label="Product list">
+                    <ul class="eg-wishlist-drawer-product-list" style="display: flex;flex-direction:column" aria-label="Product list">
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            contactButton.addEventListener('click', function() {
+                window.location.href = "/pages/contact#form";
+            });
+        });
+    </script>
 </eg-wishlist-drawer>
 
 {% schema %}
@@ -110,3 +117,5 @@
     ]
 }
 {% endschema %}
+
+

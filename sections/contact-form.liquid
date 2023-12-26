@@ -134,14 +134,19 @@
     // document onload
 
     window.addEventListener('load', function() {
-        const productDetails = localStorage.getItem('selectedProductDetails');
+        const products = localStorage.getItem('eg_wishlist_v2');
 
-        if (productDetails) {
-          const parsed = JSON.parse(productDetails);
+        if (products) {
+          const parsed = JSON.parse(products);
 
-          document.getElementById('ContactForm-body').value = `Goeiemiddag, ik heb interesse in het product: ${parsed.title} met ID ${parsed.id}\n\nExtra informatie:\n`;
-        
-          localStorage.removeItem('selectedProductDetails');
+          if (parsed.length > 0) {
+              let text = "Goeiemiddag, ik heb interesse in de volgende producten: \n\n";
+              parsed.forEach(element => {
+                  text += `- ${element.title} met ID ${element.id}\n`;
+              });
+              document.getElementById('ContactForm-body').value = text;
+          }
+          console.log("lmao");
         }
     });
   </script>
