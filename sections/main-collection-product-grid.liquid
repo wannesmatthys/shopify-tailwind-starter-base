@@ -27,7 +27,7 @@
   }
 {%- endstyle -%}
 
-<div class="section-{{ section.id }}-padding">
+<div class="section-{{ section.id }}-padding" {% if section.settings.rental %} id="rental" {% endif %}>
   {%- paginate collection.products by section.settings.products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
@@ -176,7 +176,8 @@
                     lazy_load: lazy_load,
                     show_quick_add: section.settings.enable_quick_add,
                     section_id: section.id,
-                    show_price: section.settings.show_price
+                    show_price: section.settings.show_price,
+                    rental: section.settings.rental
                   %}
                 </li>
               {%- endfor -%}
@@ -301,6 +302,12 @@
       "default": true,
       "label": "t:sections.main-collection-product-grid.settings.show_price.label"
     },  
+    {
+      "type": "checkbox",
+      "id": "rental",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.rental.label"
+    },
     {
       "type": "checkbox",
       "id": "show_rating",

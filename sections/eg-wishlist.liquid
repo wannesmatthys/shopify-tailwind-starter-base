@@ -1,0 +1,112 @@
+{% comment %} 
+    EG Wishlist
+    © 2022 EcomGraduates
+    https://wwww.ecomgraduates.com 
+{% endcomment %}
+
+{% liquid
+    assign card_icon_color = section.settings.card_icon_color | default: 'currentColor'
+    if card_icon_color == 'rgba(0,0,0,0)'
+        assign card_icon_color = 'currentColor'
+    endif
+%}
+
+{{ 'eg-wishlist.css' | asset_url | stylesheet_tag }}
+
+<script>
+    window.eg_wishlist = {
+        money_format: '{{ shop.money_format }}',
+        card_icon_color: '{{ card_icon_color }}',
+        text_wishlist: '{{ section.settings.text_wishlist }}',
+        text_add: '{{ section.settings.text_add }}',
+        text_remove: '{{ section.settings.text_remove }}',
+    }
+</script>
+
+<script src="{{ 'eg-wishlist.js' | asset_url }}" defer></script>
+
+<eg-wishlist-drawer class="drawer is-empty animate">
+    <div id="WishlistDrawer" class="wishlist-drawer">
+        <div id="WishlistDrawer-Overlay" class="wishlist-drawer__overlay"></div>
+            <div class="drawer__inner" role="dialog" aria-modal="true" aria-label="Your wishlist" tabindex="-1">
+                <div class="drawer__inner-empty" hidden>
+                    <div class="cart-drawer__warnings center">
+                        <div class="cartt-drawer__empty-content">
+                            <h2 class="cart__empty-text">
+                                {{ section.settings.text_empty }}
+                            </h2>
+                            <button class="drawer__close" type="button" onclick="this.closest('eg-wishlist-drawer').close()" aria-label="Close">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" fill="none" viewBox="0 0 18 17">
+                                    <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor"></path>
+                                </svg>
+                            </button>
+                            <a href="{{ routes.all_products_collection_url }}" class="button">
+                                {{ 'general.continue_shopping' | t }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="drawer__inner-filled" hidden>
+                    <div class="drawer__header">
+                        <h2 class="drawer__heading">
+                            {{ section.settings.text_wishlist }}
+                        </h2>
+                        <button class="drawer__close" type="button" onclick="this.closest('eg-wishlist-drawer').close()" aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" fill="none" viewBox="0 0 18 17">
+                                <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <ul class="eg-wishlist-drawer-product-list" aria-label="Product list">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</eg-wishlist-drawer>
+
+{% schema %}
+{
+    "name": "Verlanglijst",
+    "settings": [
+        {
+            "type": "header",
+            "content": "General"
+        },
+        {
+            "type": "color",
+            "id": "card_icon_color",
+            "label": "Icon color",
+            "info": "Applies only within product cards. You may change this to white if your photos are mostly dark."
+        },
+        {
+            "type": "header",
+            "content": "Translatable Text"
+        },
+        {
+            "type": "text",
+            "id": "text_wishlist",
+            "label": "Wishlist",
+            "default": "Verlanglijst"
+        },
+        {
+            "type": "text",
+            "id": "text_add",
+            "label": "Add",
+            "default": "Toevoegen aan verlanglijst"
+        },
+        {
+            "type": "text",
+            "id": "text_remove",
+            "label": "Remove",
+            "default": "Verwijderen van verlanglijst"
+        },
+        {
+            "type": "text",
+            "id": "text_empty",
+            "label": "Empty",
+            "default": "Je verlanglijst is leeg"
+        }
+    ]
+}
+{% endschema %}

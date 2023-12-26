@@ -113,6 +113,7 @@
     "cart_type": "drawer",
     "show_vendor": false,
     "show_price": true,
+    "rental": false,
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "sections": {
@@ -359,6 +360,7 @@
       "cart_type": "notification",
       "show_vendor": false,
       "show_price": true,
+      "rental": false,
       "show_cart_note": false,
       "cart_drawer_collection": "",
       "sections": {
