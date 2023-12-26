@@ -431,13 +431,9 @@ class EgWishlistDrawer extends HTMLElement {
         <div style="float:right; padding-bottom: 2rem">
           <strong>Totaal:</strong> <span>${formatMoney(total)}</span>
         </div>
-        <button
-          type="submit"
-          name="add"
-          class="product-form__submit button button--full-width button--primary"
-        >
-          Contacteer ons
-        </button>
+        <a href="/pages/contact#form" class="product-form__submit button button--full-width button--primary">
+        Contacteer ons
+        </a>
       </li>
       
       `;
