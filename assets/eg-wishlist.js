@@ -259,7 +259,10 @@ window.onClickEgWishlistButton = async (btn, event) => {
     const response = await fetch(`/products/${btn.dataset.productHandle}.js`);
     const product = await response.json();
 
-    console.log(product);
+    if (product.variants[0].taxable) {
+      product.price_exclusive_tax = product.price * 0.79;
+      product.tax = product.price - product.price_exclusive_tax;
+    }
 
     wishlist.push({
       id: product.id,
@@ -272,6 +275,8 @@ window.onClickEgWishlistButton = async (btn, event) => {
       featured_image: product.featured_image,
       vendor: product.vendor,
       time: Date.now(),
+      tax: product.tax,
+      price_exclusive_tax: product.price_exclusive_tax,
     });
   }
 
@@ -372,9 +377,14 @@ class EgWishlistDrawer extends HTMLElement {
       let buildProductListItems = '';
 
       let total = 0;
+      let total_tax = 0;
+      let total_excl_tax = 0;
 
       wishlist.forEach((product) => {
         total += product.price;
+        total_tax += product.tax;
+        total_excl_tax += product.price_exclusive_tax;
+
         buildProductListItems += `
                     <li class="eg-wishlist-drawer-product-list-item" style="height:fit-content">
                         <a href="${product.url}" class="">
@@ -428,9 +438,19 @@ class EgWishlistDrawer extends HTMLElement {
 
       buildProductListItems += `
       <li class="eg-wishlist-drawer-product-list-item" style="display:block; height:fit-content; margin-top:auto; padding-bottom: 2rem">
-        <div style="float:right; padding-bottom: 2rem">
-          <strong>Totaal:</strong> <span>${formatMoney(total)}</span>
-        </div>
+      <div style="display: grid; grid-template-columns: auto auto; gap: 5px; float: right; padding-bottom: 2rem;">
+    <div style="text-align: right;"><strong>Totaal excl. BTW:</strong></div>
+    <div>${formatMoney(total_excl_tax)}</div>
+
+    <div style="text-align: right;"><strong>BTW:</strong></div>
+    <div>${formatMoney(total_tax)}</div>
+
+    <div style="text-align: right;"><strong>Totaal incl. BTW:</strong></div>
+    <div>${formatMoney(total)}</div>
+</div>
+
+
+  
         <a href="/pages/contact#form" class="product-form__submit button button--full-width button--primary">
         Contacteer ons
         </a>
