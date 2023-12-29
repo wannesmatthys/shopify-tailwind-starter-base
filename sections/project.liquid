@@ -3,6 +3,7 @@
   let title;
   let description;
   let productModal;
+  let date;
 
   function init() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -11,6 +12,8 @@
     description = document.querySelector("#product-info");
     title = document.querySelector("#product-title");
     productModal = document.querySelector("#product-modal");
+    date = document.querySelector("#date");
+
     fetchProject(projectId);
   }
 
@@ -37,6 +40,12 @@
         description.innerHTML = data.description;
         title.innerHTML = data.title;
         productModal.innerHTML = modalHtml;
+        const dateObj = new Date(data.date);
+        const dag = dateObj.getDate(); // gets the day
+        const maand = dateObj.getMonth() + 1; // gets the month (0-indexed, hence +1)
+        const jaar = dateObj.getFullYear(); // gets the year
+        const formattedDate = ('0' + dag).slice(-2) + '/' + ('0' + maand).slice(-2) + '/' + jaar;
+        date.innerHTML = formattedDate;
       })
       .catch(error => console.error('Error:', error));
   }
@@ -132,6 +141,7 @@
               <p class="product__text inline-richtext caption-with-letter-spacing">Ethernum</p>
               <div class="product__title">
                 <h1 id="product-title"></h1>
+                <span style="font-size: 1.2rem" class="twcss-slate-400 twcss-font-bold" id="date"></span>
               </div>
               </noscript>
               <div>

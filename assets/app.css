@@ -762,6 +762,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 2rem;
 }
 
+.twcss-text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .\!twcss-font-bold {
   font-weight: 700 !important;
 }
