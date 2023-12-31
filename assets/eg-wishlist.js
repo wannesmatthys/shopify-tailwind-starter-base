@@ -260,8 +260,8 @@ window.onClickEgWishlistButton = async (btn, event) => {
     const product = await response.json();
 
     if (product.variants[0].taxable) {
-      product.price_exclusive_tax = product.price * 0.79;
-      product.tax = product.price - product.price_exclusive_tax;
+      product.tax = product.price * (21 / 121);
+      product.price_exclusive_tax = product.price - product.tax;
     }
 
     wishlist.push({
