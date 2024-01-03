@@ -22,11 +22,25 @@
           "settings": {
             "collection": "verhuur-subcategorie"
           }
+        },
+        "1604d244-f9f2-4933-8b2e-73ca97fc8914": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "mixers"
+          }
+        },
+        "3959ff83-49d1-4b2f-8c01-52961e7e25cf": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "stage-light"
+          }
         }
       },
       "block_order": [
         "template--20400296460620__84b8c741-aca7-4a8e-a811-136f0e47877d-featured_collection-1",
-        "template--20400296460620__84b8c741-aca7-4a8e-a811-136f0e47877d-featured_collection-2"
+        "template--20400296460620__84b8c741-aca7-4a8e-a811-136f0e47877d-featured_collection-2",
+        "1604d244-f9f2-4933-8b2e-73ca97fc8914",
+        "3959ff83-49d1-4b2f-8c01-52961e7e25cf"
       ],
       "settings": {
         "title": "Verhuur",
