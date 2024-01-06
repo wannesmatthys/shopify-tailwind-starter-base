@@ -46,6 +46,18 @@
           "settings": {
             "collection": "samplers-synths"
           }
+        },
+        "bf8e502f-732c-4e47-abab-9e362e048545": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "amplifiers"
+          }
+        },
+        "28e791d0-b464-4fc8-81f1-745981a39278": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "stage-effects"
+          }
         }
       },
       "block_order": [
@@ -54,7 +66,9 @@
         "1604d244-f9f2-4933-8b2e-73ca97fc8914",
         "3959ff83-49d1-4b2f-8c01-52961e7e25cf",
         "8c939acc-b172-4d6d-959b-f0926bcabd63",
-        "21bb89a7-6b50-469f-be8b-4c63395a1032"
+        "21bb89a7-6b50-469f-be8b-4c63395a1032",
+        "bf8e502f-732c-4e47-abab-9e362e048545",
+        "28e791d0-b464-4fc8-81f1-745981a39278"
       ],
       "settings": {
         "title": "Verhuur",
