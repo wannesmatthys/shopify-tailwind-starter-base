@@ -40,6 +40,12 @@
           "settings": {
             "collection": "belichting"
           }
+        },
+        "21bb89a7-6b50-469f-be8b-4c63395a1032": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "samplers-synths"
+          }
         }
       },
       "block_order": [
@@ -47,7 +53,8 @@
         "template--20400296460620__84b8c741-aca7-4a8e-a811-136f0e47877d-featured_collection-2",
         "1604d244-f9f2-4933-8b2e-73ca97fc8914",
         "3959ff83-49d1-4b2f-8c01-52961e7e25cf",
-        "8c939acc-b172-4d6d-959b-f0926bcabd63"
+        "8c939acc-b172-4d6d-959b-f0926bcabd63",
+        "21bb89a7-6b50-469f-be8b-4c63395a1032"
       ],
       "settings": {
         "title": "Verhuur",
