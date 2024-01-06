@@ -34,13 +34,20 @@
           "settings": {
             "collection": "stage-light"
           }
+        },
+        "8c939acc-b172-4d6d-959b-f0926bcabd63": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "belichting"
+          }
         }
       },
       "block_order": [
         "template--20400296460620__84b8c741-aca7-4a8e-a811-136f0e47877d-featured_collection-1",
         "template--20400296460620__84b8c741-aca7-4a8e-a811-136f0e47877d-featured_collection-2",
         "1604d244-f9f2-4933-8b2e-73ca97fc8914",
-        "3959ff83-49d1-4b2f-8c01-52961e7e25cf"
+        "3959ff83-49d1-4b2f-8c01-52961e7e25cf",
+        "8c939acc-b172-4d6d-959b-f0926bcabd63"
       ],
       "settings": {
         "title": "Verhuur",
