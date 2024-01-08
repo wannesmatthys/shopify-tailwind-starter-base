@@ -183,9 +183,50 @@ const insertWishlistButtons = () => {
     let productHandle = productLink.split('products/')[1];
     productHandle = productHandle.split('?')[0];
 
+    let wishlist = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+    const item = wishlist.find((elem) => elem.handle === productHandle);
+    const value = item.amount ? item.amount : 1;
+
     productForm.insertAdjacentHTML(
       'afterend',
       `
+      <div id="Quantity-Form-template--20268139872588__main" class="product-form__input product-form__quantity">
+                
+                
+
+                <label class="quantity__label form__label" for="Quantity-template--20268139872588__main">
+                  Aantal
+                  <span class="quantity__rules-cart no-js-hidden hidden">
+                    <span class="loading-overlay hidden">
+                      <span class="loading-overlay__spinner">
+                        <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                      </span>
+                    </span>
+                  </span>
+                </label>
+                <div class="price-per-item__container">
+                  <quantity-input class="quantity" data-url="/products/verhuur-mojo-2200-curve-800wrms" data-section="template--20268139872588__main">
+                    <button class="quantity__button no-js-hidden disabled" name="minus" type="button">
+                      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="icon icon-minus" fill="none" viewBox="0 0 10 2">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M.5 1C.5.7.7.5 1 .5h8a.5.5 0 110 1H1A.5.5 0 01.5 1z" fill="currentColor">
+</path></svg>
+
+                    </button>
+                    <input onchange="onChangeEgWishlistButton('${productHandle}')" class="quantity__input" type="number" name="quantity" id="Quantity-template--20268139872588__main" data-cart-quantity="0" data-min="1" min="1" step="1" value="${value}" form="product-form-template--20268139872588__main" max="null">
+                    <button class="quantity__button no-js-hidden" name="plus" type="button">
+                      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="icon icon-plus" fill="none" viewBox="0 0 10 10">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M1 4.51a.5.5 0 000 1h3.5l.01 3.5a.5.5 0 001-.01V5.5l3.5-.01a.5.5 0 00-.01-1H5.5L5.49.99a.5.5 0 00-1 .01v3.5l-3.5.01H1z" fill="currentColor">
+</path></svg>
+
+                    </button>
+                  </quantity-input></div>
+                <div class="quantity__rules caption no-js-hidden" id="Quantity-Rules-template--20268139872588__main"></div></div>
+
+                <br/>
+
+
             <button
                 type="button"
                 class="btn-add-remove-from-wishlist button button--full-width button--tertiary"
@@ -264,6 +305,10 @@ window.onClickEgWishlistButton = async (btn, event) => {
       product.price_exclusive_tax = product.price - product.tax;
     }
 
+    const amount = document.querySelector(
+      '#Quantity-template--20268139872588__main',
+    ).value;
+
     wishlist.push({
       id: product.id,
       handle: product.handle,
@@ -277,6 +322,27 @@ window.onClickEgWishlistButton = async (btn, event) => {
       time: Date.now(),
       tax: product.tax,
       price_exclusive_tax: product.price_exclusive_tax,
+      amount: parseInt(amount),
+    });
+  }
+
+  localStorage.setItem(localStorageKey, JSON.stringify(wishlist));
+  initWishlist();
+};
+
+window.onChangeEgWishlistButton = async (productHandle) => {
+  let wishlist = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+  const isWishlisted = wishlist.some((elem) => elem.handle === productHandle);
+
+  if (isWishlisted) {
+    wishlist = wishlist.map((elem) => {
+      if (elem.handle === productHandle) {
+        const amount = document.querySelector(
+          '#Quantity-template--20268139872588__main',
+        ).value;
+        elem.amount = parseInt(amount);
+      }
+      return elem;
     });
   }
 
@@ -381,9 +447,9 @@ class EgWishlistDrawer extends HTMLElement {
       let total_excl_tax = 0;
 
       wishlist.forEach((product) => {
-        total += product.price;
-        total_tax += product.tax;
-        total_excl_tax += product.price_exclusive_tax;
+        total += product.price * product.amount;
+        total_tax += product.tax * product.amount;
+        total_excl_tax += product.price_exclusive_tax * product.amount;
 
         buildProductListItems += `
                     <li class="eg-wishlist-drawer-product-list-item" style="height:fit-content">
@@ -418,7 +484,9 @@ class EgWishlistDrawer extends HTMLElement {
                                     ${formatMoney(product.compare_at_price)}
                                 </s>
                                 <span class="product-price-final">
-                                    ${formatMoney(product.price)}
+                                    <strong>${
+                                      product.amount
+                                    }</strong> x ${formatMoney(product.price)}
                                 </span>
                             </div>
                         </div>
