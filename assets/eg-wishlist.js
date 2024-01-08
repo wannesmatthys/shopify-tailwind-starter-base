@@ -185,7 +185,7 @@ const insertWishlistButtons = () => {
 
     let wishlist = JSON.parse(localStorage.getItem(localStorageKey)) || [];
     const item = wishlist.find((elem) => elem.handle === productHandle);
-    const value = item.amount ? item.amount : 1;
+    const value = item && item.amount ? item.amount : 1;
 
     productForm.insertAdjacentHTML(
       'afterend',
