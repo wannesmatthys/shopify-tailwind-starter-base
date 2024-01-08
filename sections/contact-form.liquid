@@ -142,7 +142,7 @@
           if (parsed.length > 0) {
               let text = "Goeiemiddag, ik heb interesse in de volgende producten: \n\n";
               parsed.forEach(element => {
-                  text += `- ${element.title} met ID ${element.id}\n`;
+                  text += `- ${element.title} met ID ${element.id} (${element.amount}x)\n`;
               });
               text += '\nIk zou de goederen graag gebruiken op: {\{VUL IN}}';
               document.getElementById('ContactForm-body').value = text;
