@@ -1,18 +1,18 @@
 {% javascript  %} 
 
 const linkWebshopElement = document.querySelector('#webshop'); // Replace with your actual class or ID
-linkWebshopElement.addEventListener('touchstart', function(event) {
+linkWebshopElement.addEventListener('touchend', function(event) {
     window.location.href = '/'; // Redirect to the link's href attribute
 });
 
 
 const linkRentalElement = document.querySelector('#rental'); // Replace with your actual class or ID
-linkRentalElement.addEventListener('touchstart', function(event) {
+linkRentalElement.addEventListener('touchend', function(event) {
     window.location.href = '/pages/verhuur'; // Redirect to the link's href attribute
 });
 
 const linkRealisationsElement = document.querySelector('#realisations'); // Replace with your actual class or ID
-linkRealisationsElement.addEventListener('touchstart', function(event) {
+linkRealisationsElement.addEventListener('touchend', function(event) {
     window.location.href = '/pages/contact'; // Redirect to the link's href attribute
 });
 
