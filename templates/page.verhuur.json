@@ -58,6 +58,12 @@
           "settings": {
             "collection": "stage-effects"
           }
+        },
+        "featured_collection_MEe8K6": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "oldtimer-decor"
+          }
         }
       },
       "block_order": [
@@ -68,7 +74,8 @@
         "8c939acc-b172-4d6d-959b-f0926bcabd63",
         "21bb89a7-6b50-469f-be8b-4c63395a1032",
         "bf8e502f-732c-4e47-abab-9e362e048545",
-        "28e791d0-b464-4fc8-81f1-745981a39278"
+        "28e791d0-b464-4fc8-81f1-745981a39278",
+        "featured_collection_MEe8K6"
       ],
       "settings": {
         "title": "Rental",
